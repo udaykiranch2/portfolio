@@ -1,5 +1,6 @@
 import { Container, Typography, Grid2, Paper, useTheme, Theme } from "@mui/material";
 import { portfolioConfig } from '../config/portfolio.config';
+import FadeInSection from './FadeInSection';
 
 const getIconColor = (theme: Theme, color: string) => {
   switch (color) {
@@ -22,63 +23,67 @@ const Skills = () => {
 
   return (
     <Container id="skills" className="py-16">
-      <Typography 
-        variant="h4" 
-        sx={{
-          textAlign: 'center',
-          mb: 4,
-          color: theme.palette.text.primary
-        }}
-      >
-        {skills.title}
-      </Typography>
+      <FadeInSection>
+        <Typography 
+          variant="h4" 
+          sx={{
+            textAlign: 'center',
+            mb: 4,
+            color: theme.palette.text.primary
+          }}
+        >
+          {skills.title}
+        </Typography>
+      </FadeInSection>
       <Grid2 container spacing={2}>
-        {skills.categories.map((category) => {
+        {skills.categories.map((category, index) => {
           const Icon = category.icon;
           return (
             <Grid2 size={{ xs: 12, sm: 6, md: 3 }} key={category.category}>
-              <Paper 
-                sx={{
-                  p: 4,
-                  height: '100%',
-                  bgcolor: theme.palette.background.paper,
-                  transition: 'transform 0.2s',
-                  '&:hover': {
-                    transform: 'scale(1.05)',
-                  },
-                }}
-                elevation={0}
-              >
-                <div className="flex flex-col items-center text-center">
-                  <Icon
-                    sx={{ 
-                      fontSize: '2rem',
-                      color: getIconColor(theme, category.iconColor), 
-                      mb: 1.5
-                    }}
-                  />
-                  <Typography 
-                    variant="subtitle1" 
-                    sx={{
-                      my: 2,
-                      color: theme.palette.text.primary
-                    }}
-                  >
-                    {category.category}
-                  </Typography>
-                  <div className="space-y-1">
-                    {category.skills.map((skill) => (
-                      <Typography
-                        key={skill}
-                        variant="body2"
-                        sx={{ color: theme.palette.text.secondary }}
-                      >
-                        {skill}
-                      </Typography>
-                    ))}
+              <FadeInSection delay={index * 0.2}>
+                <Paper 
+                  sx={{
+                    p: 4,
+                    height: '100%',
+                    bgcolor: theme.palette.background.paper,
+                    transition: 'transform 0.2s',
+                    '&:hover': {
+                      transform: 'scale(1.05)',
+                    },
+                  }}
+                  elevation={0}
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <Icon
+                      sx={{ 
+                        fontSize: '2rem',
+                        color: getIconColor(theme, category.iconColor), 
+                        mb: 1.5
+                      }}
+                    />
+                    <Typography 
+                      variant="subtitle1" 
+                      sx={{
+                        my: 2,
+                        color: theme.palette.text.primary
+                      }}
+                    >
+                      {category.category}
+                    </Typography>
+                    <div className="space-y-1">
+                      {category.skills.map((skill) => (
+                        <Typography
+                          key={skill}
+                          variant="body2"
+                          sx={{ color: theme.palette.text.secondary }}
+                        >
+                          {skill}
+                        </Typography>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </Paper>
+                </Paper>
+              </FadeInSection>
             </Grid2>
           );
         })}

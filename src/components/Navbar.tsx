@@ -16,10 +16,27 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      // Find which section is currently in view
+      const sections = navItems.map(item => ({
+        id: item.toLowerCase(),
+        element: document.getElementById(item.toLowerCase())
+      }));
+
+      const currentSection = sections.find(section => {
+        if (!section.element) return false;
+        const rect = section.element.getBoundingClientRect();
+        return rect.top <= 100 && rect.bottom >= 100;
+      });
+
+      if (currentSection) {
+        setActiveSection(currentSection.id);
+      }
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [navItems]);
 
   const scrollToSection = (section: string) => {
     setActiveSection(section.toLowerCase());

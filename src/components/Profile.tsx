@@ -45,14 +45,14 @@ const Profile = () => {
             transition: 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)',
             transformStyle: 'preserve-3d',
             '&:hover': {
-              transform: 'rotateX(8deg)',
+              transform: 'rotateX(8deg) translateY(-10px)',
               boxShadow: `
                 0 20px 40px rgba(0,0,0,0.12),
                 0 1px 3px rgba(0,0,0,0.05),
                 inset 0 1px 1px rgba(255,255,255,0.2)
               `,
               '& img': {
-                transform: 'translateZ(30px) rotateX(-12deg) scale(1.05)',
+                transform: 'translateZ(30px) rotateX(-8deg) scale(1.02)',
               },
             },
           }}
@@ -67,7 +67,8 @@ const Profile = () => {
               objectFit: 'cover',
               objectPosition: 'center',
               transition: 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)',
-              transform: 'translateZ(0)',
+              transform: 'translateZ(0) rotateX(0deg)',
+              transformOrigin: 'bottom',
             }}
           />
         </Box>
