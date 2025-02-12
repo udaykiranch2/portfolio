@@ -23,7 +23,7 @@ export const lightTheme: CustomThemeOptions = {
     },
   },
   typography: {
-    fontFamily: "'Inter', sans-serif",
+    fontFamily: "'Plus Jakarta Sans', sans-serif",
     h1: { fontSize: "3.5rem", fontWeight: 700, color: "#0F172A" },
     h2: { fontSize: "2.5rem", fontWeight: 600, color: "#0F172A" },
     h3: { fontSize: "2rem", fontWeight: 600, color: "#0F172A" },
@@ -54,7 +54,7 @@ export const darkTheme: CustomThemeOptions = {
     },
   },
   typography: {
-    fontFamily: "'Inter', sans-serif",
+    fontFamily: "'Plus Jakarta Sans', sans-serif",
     h1: { fontSize: "3.5rem", fontWeight: 700, color: "#F1F5F9" },
     h2: { fontSize: "2.5rem", fontWeight: 600, color: "#F1F5F9" },
     h3: { fontSize: "2rem", fontWeight: 600, color: "#F1F5F9" },

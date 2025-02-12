@@ -16,44 +16,37 @@ const Profile = () => {
       <Box
         sx={{
           position: 'relative',
-          transform: 'rotateX(5deg)',
-          transformStyle: 'preserve-3d',
           '&::before': {
             content: '""',
             position: 'absolute',
-            inset: '-10px -10px -20px -10px',
-            background: 'linear-gradient(145deg, rgba(0,118,255,0.15), rgba(0,118,255,0))',
-            borderRadius: '30px',
-            filter: 'blur(15px)',
+            top: '-20%',
+            left: '-10%',
+            right: '-10%',
+            bottom: '-20%',
+            background: 'radial-gradient(circle at 30% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 70%)',
+            filter: 'blur(30px)',
             zIndex: 0,
           },
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            top: '-10%',
+            left: '-5%',
+            right: '-5%',
+            bottom: '-10%',
+            background: 'linear-gradient(145deg, rgba(0,0,0,0.08), transparent)',
+            clipPath: 'polygon(30% 0%, 100% 20%, 70% 100%, 0% 80%)',
+            zIndex: 0,
+          }
         }}
       >
         <Box
           sx={{
             position: 'relative',
             zIndex: 1,
-            overflow: 'hidden',
-            borderRadius: '24px',
-            background: 'linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))',
-            backdropFilter: 'blur(10px)',
-            boxShadow: `
-              0 10px 30px rgba(0,0,0,0.1),
-              0 1px 3px rgba(0,0,0,0.05),
-              inset 0 1px 1px rgba(255,255,255,0.2)
-            `,
-            transition: 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)',
-            transformStyle: 'preserve-3d',
+            transition: 'transform 0.5s ease',
             '&:hover': {
-              transform: 'rotateX(8deg) translateY(-10px)',
-              boxShadow: `
-                0 20px 40px rgba(0,0,0,0.12),
-                0 1px 3px rgba(0,0,0,0.05),
-                inset 0 1px 1px rgba(255,255,255,0.2)
-              `,
-              '& img': {
-                transform: 'translateZ(30px) rotateX(-8deg) scale(1.02)',
-              },
+              transform: 'scale(1.02)',
             },
           }}
         >
@@ -64,11 +57,10 @@ const Profile = () => {
               display: 'block',
               width: '100%',
               height: 'auto',
-              objectFit: 'cover',
+              objectFit: 'contain',
               objectPosition: 'center',
-              transition: 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)',
-              transform: 'translateZ(0) rotateX(0deg)',
-              transformOrigin: 'bottom',
+              transition: 'transform 0.5s ease',
+              filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))',
             }}
           />
         </Box>

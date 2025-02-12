@@ -4,11 +4,28 @@ import { CustomThemeOptions } from './types';
 // Shared color palette
 const colors = {
   blue: {
-    50: '#EFF6FF',
-    100: '#DBEAFE',
-    400: '#60A5FA',
-    500: '#3B82F6',
-    600: '#2563EB',
+    50: '#E3F2FD',
+    100: '#BBDEFB',
+    200: '#90CAF9',
+    300: '#64B5F6',
+    400: '#42A5F5',
+    500: '#2196F3',
+    600: '#1E88E5',
+    700: '#1976D2',
+    800: '#1565C0',
+    900: '#0D47A1',
+  },
+  purple: {
+    50: '#F3E5F5',
+    100: '#E1BEE7',
+    200: '#CE93D8',
+    300: '#BA68C8',
+    400: '#AB47BC',
+    500: '#9C27B0',
+    600: '#8E24AA',
+    700: '#7B1FA2',
+    800: '#6A1B9A',
+    900: '#4A148C',
   },
   slate: {
     50: '#F8FAFC',
@@ -21,11 +38,6 @@ const colors = {
     700: '#334155',
     800: '#1E293B',
     900: '#0F172A',
-  },
-  green: {
-    400: '#34D399',
-    500: '#10B981',
-    600: '#059669',
   },
 };
 
@@ -82,17 +94,17 @@ export const lightTheme: CustomThemeOptions = {
     mode: 'light',
     primary: {
       main: colors.blue[500],
-      light: colors.blue[400],
-      dark: colors.blue[600],
+      light: colors.blue[300],
+      dark: colors.blue[700],
     },
     secondary: {
-      main: colors.green[500],
-      light: colors.green[400],
-      dark: colors.green[600],
+      main: colors.purple[500],
+      light: colors.purple[300],
+      dark: colors.purple[700],
     },
     background: {
       default: colors.slate[50],
-      paper: '#FFFFFF',
+      paper: 'rgba(255, 255, 255, 0.8)',
     },
     text: {
       primary: colors.slate[900],
@@ -126,18 +138,18 @@ export const darkTheme: CustomThemeOptions = {
   palette: {
     mode: 'dark',
     primary: {
-      main: colors.blue[500],
-      light: colors.blue[400],
+      main: colors.blue[400],
+      light: colors.blue[300],
       dark: colors.blue[600],
     },
     secondary: {
-      main: colors.green[500],
-      light: colors.green[400],
-      dark: colors.green[600],
+      main: colors.purple[400],
+      light: colors.purple[300],
+      dark: colors.purple[600],
     },
     background: {
       default: colors.slate[900],
-      paper: colors.slate[800],
+      paper: 'rgba(30, 41, 59, 0.8)',
     },
     text: {
       primary: colors.slate[100],

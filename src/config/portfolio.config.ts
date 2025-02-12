@@ -1,5 +1,8 @@
 import { GitHub, LinkedIn, Email, X, Code, Brush, Storage, Build } from "@mui/icons-material";
 import image from "../assets/meAi.png";
+import ecommerce from "../assets/ecommerce.png";
+import task from "../assets/taskmanagement.png";
+import portfolio from "../assets/portfolio.png";
 export const portfolioConfig = {
   // Navbar & Personal Info
   personal: {
@@ -83,24 +86,24 @@ export const portfolioConfig = {
     items: [
       {
         title: "E-Commerce Platform",
-        description: "A full-featured e-commerce platform built with React, Node.js, and MongoDB.",
-        image: "https://via.placeholder.com/400x250",
+        description: "A full-featured e-commerce platform built with React, Node.js, and MongoDB. Features include user authentication, product catalog management, shopping cart functionality, secure payment processing, order tracking, and an admin dashboard for inventory management. Implemented responsive design patterns and optimized performance through lazy loading and caching strategies.",
+        image: ecommerce,
         technologies: ["React", "Node.js", "MongoDB", "Express"],
         githubLink: "#",
         liveLink: "#",
       },
       {
         title: "Task Management App",
-        description: "A collaborative task management application with real-time updates.",
-        image: "https://via.placeholder.com/400x250",
+        description: "A collaborative task management application with real-time updates. Includes features like task categorization, due date tracking, team collaboration tools, file attachments, and progress tracking. Implemented real-time notifications using WebSocket technology and integrated with Google Calendar for seamless schedule management.",
+        image: task,
         technologies: ["Next.js", "TypeScript", "Firebase", "Tailwind"],
         githubLink: "#",
         liveLink: "#",
       },
       {
         title: "Portfolio Website",
-        description: "A modern portfolio website built with React and Material-UI.",
-        image: "https://via.placeholder.com/400x250",
+        description: "A modern portfolio website built with React and Material-UI. Features include dark/light theme switching, smooth scrolling navigation, animated section transitions, and responsive design. Optimized for accessibility and SEO, with perfect Lighthouse scores and comprehensive meta tags implementation.",
+        image: portfolio,
         technologies: ["React", "Material-UI", "Tailwind CSS"],
         githubLink: "#",
         liveLink: "#",

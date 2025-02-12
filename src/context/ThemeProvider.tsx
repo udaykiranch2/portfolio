@@ -16,6 +16,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
           styles={(theme) => ({
             body: {
               position: 'relative',
+              backgroundColor: theme.palette.background.default,
               '&::before': {
                 content: '""',
                 position: 'fixed',
@@ -23,41 +24,46 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                opacity: 0.15,
+                opacity: 0.6,
                 zIndex: -1,
                 background: darkMode
                   ? `
-                    radial-gradient(80% 80% at 50% -20%, ${theme.palette.primary.dark}80 0%, transparent 100%),
-                    radial-gradient(50% 50% at 25% 25%, ${theme.palette.secondary.dark}80 0%, transparent 100%),
-                    radial-gradient(30% 30% at 75% 75%, ${theme.palette.primary.dark}80 0%, transparent 100%),
-                    radial-gradient(70% 70% at 100% 50%, ${theme.palette.secondary.dark}80 0%, transparent 100%),
-                    radial-gradient(40% 40% at 15% 75%, ${theme.palette.primary.dark}80 0%, transparent 100%),
-                    radial-gradient(60% 60% at 85% 15%, ${theme.palette.secondary.dark}80 0%, transparent 100%)
+                    radial-gradient(100% 100% at 50% -20%, ${theme.palette.primary.dark}40 0%, transparent 100%),
+                    radial-gradient(70% 70% at 100% 20%, ${theme.palette.secondary.dark}40 0%, transparent 100%),
+                    radial-gradient(60% 60% at 0% 80%, ${theme.palette.primary.dark}40 0%, transparent 100%),
+                    repeating-linear-gradient(45deg, ${theme.palette.background.paper} 0%, transparent 1px, transparent 2px, ${theme.palette.background.paper} 3px)
                   `
                   : `
-                    radial-gradient(80% 80% at 50% -20%, ${theme.palette.primary.light}80 0%, transparent 100%),
-                    radial-gradient(50% 50% at 25% 25%, ${theme.palette.secondary.light}80 0%, transparent 100%),
-                    radial-gradient(30% 30% at 75% 75%, ${theme.palette.primary.light}80 0%, transparent 100%),
-                    radial-gradient(70% 70% at 100% 50%, ${theme.palette.secondary.light}80 0%, transparent 100%),
-                    radial-gradient(40% 40% at 15% 75%, ${theme.palette.primary.light}80 0%, transparent 100%),
-                    radial-gradient(60% 60% at 85% 15%, ${theme.palette.secondary.light}80 0%, transparent 100%)
+                    radial-gradient(100% 100% at 50% -20%, ${theme.palette.primary.light}30 0%, transparent 100%),
+                    radial-gradient(70% 70% at 100% 20%, ${theme.palette.secondary.light}30 0%, transparent 100%),
+                    radial-gradient(60% 60% at 0% 80%, ${theme.palette.primary.light}30 0%, transparent 100%),
+                    repeating-linear-gradient(45deg, ${theme.palette.background.paper} 0%, transparent 1px, transparent 2px, ${theme.palette.background.paper} 3px)
                   `,
                 pointerEvents: 'none',
+                transition: 'background 0.5s ease-in-out',
               },
               '&::after': {
                 content: '""',
                 position: 'fixed',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '150vmax',
-                height: '150vmax',
+                inset: 0,
                 background: darkMode
-                  ? `radial-gradient(circle, transparent 35%, ${theme.palette.background.default} 100%)`
-                  : `radial-gradient(circle, transparent 35%, ${theme.palette.background.default} 100%)`,
-                opacity: 0.9,
-                zIndex: -1,
+                  ? 'radial-gradient(100% 100% at 50% 50%, transparent 45%, rgba(0,0,0,0.4) 100%)'
+                  : 'radial-gradient(100% 100% at 50% 50%, transparent 45%, rgba(0,0,0,0.05) 100%)',
+                backdropFilter: 'blur(100px)',
                 pointerEvents: 'none',
+                zIndex: -1,
+                transition: 'background 0.5s ease-in-out',
+              }
+            },
+            '@keyframes gradient-shift': {
+              '0%': {
+                backgroundPosition: '0% 50%'
+              },
+              '50%': {
+                backgroundPosition: '100% 50%'
+              },
+              '100%': {
+                backgroundPosition: '0% 50%'
               }
             }
           })}
