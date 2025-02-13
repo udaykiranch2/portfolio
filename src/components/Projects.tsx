@@ -73,6 +73,10 @@ const Projects = () => {
                   height: '300px',
                   perspective: '1000px',
                   cursor: 'pointer',
+                  transition: 'transform 0.2s ease-in-out',
+                  '&:hover': {
+                    transform: 'scale(1.02)',
+                  },
                 }}
                 onClick={() => toggleCard(project.title)}
               >
@@ -82,7 +86,7 @@ const Projects = () => {
                     width: '100%',
                     height: '100%',
                     transformStyle: 'preserve-3d',
-                    transition: 'transform 0.6s',
+                    transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
                     transform: flippedCards[project.title] ? 'rotateY(180deg)' : 'rotateY(0deg)',
                   }}
                 >
@@ -94,6 +98,12 @@ const Projects = () => {
                       height: '100%',
                       backfaceVisibility: 'hidden',
                       bgcolor: theme.palette.background.paper,
+                      transition: 'box-shadow 0.3s ease-in-out',
+                      '&:hover': {
+                        boxShadow: `0 8px 24px ${theme.palette.mode === 'dark' 
+                          ? 'rgba(0,0,0,0.4)' 
+                          : 'rgba(0,0,0,0.1)'}`
+                      }
                     }}
                   >
                     <CardMedia
@@ -119,6 +129,12 @@ const Projects = () => {
                       transform: 'rotateY(180deg)',
                       bgcolor: theme.palette.background.paper,
                       overflow: 'auto',
+                      transition: 'box-shadow 0.3s ease-in-out',
+                      '&:hover': {
+                        boxShadow: `0 8px 24px ${theme.palette.mode === 'dark' 
+                          ? 'rgba(0,0,0,0.4)' 
+                          : 'rgba(0,0,0,0.1)'}`
+                      }
                     }}
                   >
                     <CardContent 

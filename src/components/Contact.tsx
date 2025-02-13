@@ -6,18 +6,47 @@ import {
   Paper,
   Grid2,
   useTheme,
+  Snackbar,
+  CircularProgress,
+  Alert
 } from "@mui/material";
 import { Email, Phone, LocationOn } from "@mui/icons-material";
 import { portfolioConfig } from '../config/portfolio.config';
 import FadeInSection from "./FadeInSection";
+import emailjs from '@emailjs/browser';
+import { useRef, useState } from "react";
 
 const Contact = () => {
   const theme = useTheme();
   const { contact, personal } = portfolioConfig;
+  const form = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+
+  const handleCloseSnackbar = () => {
+    setSnackbar({ ...snackbar, open: false });
+  };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Add form submission logic here
+    if(!form.current) return;
+    setIsSubmitting(true);
+    try {
+      await emailjs.sendForm(
+        'service_jzgw4ba', 
+        'template_fkkvtwm', 
+        form.current,
+        'UqXf6IuHg37nx3MR6' 
+      );
+      setSnackbar({ open: true, message: 'Message sent successfully!', severity: 'success' });
+      form.current.reset();
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSnackbar({ open: true, message: 'Failed to send message. Please try again.', severity: 'error' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -102,10 +131,11 @@ const Contact = () => {
                 borderRadius: 2
               }}
             >
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form ref={form} onSubmit={handleSubmit} className="space-y-4">
                 {contact.form.fields.map((field) => (
                   <TextField
                     key={field.name}
+                    name={field.name}
                     fullWidth
                     label={field.label}
                     type={field.type}
@@ -128,6 +158,7 @@ const Contact = () => {
                   variant="contained"
                   size="large"
                   fullWidth
+                  disabled={isSubmitting}
                   sx={{
                     py: 1.5,
                     borderRadius: 2,
@@ -143,13 +174,18 @@ const Contact = () => {
                     }
                   }}
                 >
-                  {contact.form.submitButton}
+                  {isSubmitting ? <CircularProgress size={24} sx={{ color: 'white' }} /> : contact.form.submitButton}
                 </Button>
               </form>
             </Paper>
           </FadeInSection>
         </Grid2>
       </Grid2>
+      <Snackbar open={snackbar.open} autoHideDuration={4000} onClose={handleCloseSnackbar}>
+        <Alert onClose={handleCloseSnackbar} severity={snackbar.severity as 'success' | 'error'} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };

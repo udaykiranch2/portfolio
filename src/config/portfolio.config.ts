@@ -86,7 +86,7 @@ export const portfolioConfig = {
     items: [
       {
         title: "E-Commerce Platform",
-        description: "A full-featured e-commerce platform built with React, Node.js, and MongoDB. Features include user authentication, product catalog management, shopping cart functionality, secure payment processing, order tracking, and an admin dashboard for inventory management. Implemented responsive design patterns and optimized performance through lazy loading and caching strategies.",
+        description: "A full-featured e-commerce platform built with React, Node.js, and MongoDB. Features include user authentication, product catalog management, shopping cart functionality, secure payment processing, order tracking, and an admin dashboard for inventory management. Implemented responsive design patterns and optimized performance through lazy loading and caching strategies.A full-featured e-commerce platform built with React, Node.js, and MongoDB. Features include user authentication, product catalog management, shopping cart functionality, secure payment processing, order tracking, and an admin dashboard for inventory management. Implemented responsive design patterns and optimized performance through lazy loading and caching strategies.",
         image: ecommerce,
         technologies: ["React", "Node.js", "MongoDB", "Express"],
         githubLink: "#",

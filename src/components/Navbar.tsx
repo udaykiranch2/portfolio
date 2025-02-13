@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { LightMode, DarkMode } from "@mui/icons-material";
 import { useTheme as useCustomTheme } from "../context/ThemeContext";
 import { portfolioConfig } from "../config/portfolio.config";
+import { alpha } from "@mui/material/styles";
 // import image from "../assets/meAi.png";
 
 const Navbar = () => {
@@ -142,17 +143,28 @@ const Navbar = () => {
             </div>
             <IconButton
               onClick={toggleDarkMode}
-              sx={{ 
+              sx={(theme) => ({ 
                 color: theme.palette.text.primary,
-                border: `1px solid ${theme.palette.mode === 'dark' 
-                  ? 'rgba(255,255,255,0.1)' 
-                  : 'rgba(0,0,0,0.1)'}`,
+                p: 1,
+                background: theme.palette.mode === 'dark'
+                  ? 'linear-gradient(45deg, rgba(130, 177, 255, 0.1) 30%, rgba(41, 121, 255, 0.1) 90%)'
+                  : 'linear-gradient(45deg, rgba(25, 118, 210, 0.1) 30%, rgba(33, 150, 243, 0.1) 90%)',
+                border: `0.5px solid ${theme.palette.mode === 'dark' 
+                  ? alpha(theme.palette.primary.main, 0.2)
+                  : alpha(theme.palette.primary.main, 0.2)}`,
+                borderRadius: theme.shape.borderRadius * 2,
+                transition: theme.transitions.create(['transform', 'background', 'box-shadow'], {
+                  duration: theme.transitions.duration.standard
+                }),
                 '&:hover': {
-                  backgroundColor: theme.palette.mode === 'dark' 
-                    ? 'rgba(255,255,255,0.05)'
-                    : 'rgba(0,0,0,0.05)',
+                  transform: 'translateY(-2px)',
+                  background: theme.palette.mode === 'dark'
+                    ? 'linear-gradient(45deg, rgba(130, 177, 255, 0.2) 30%, rgba(41, 121, 255, 0.2) 90%)'
+                    : 'linear-gradient(45deg, rgba(25, 118, 210, 0.2) 30%, rgba(33, 150, 243, 0.2) 90%)',
+                  boxShadow: `0 4px 20px ${alpha(theme.palette.primary.main, 0.4)}`
                 }
-              }}
+                
+              })}
             >
               {darkMode ? <LightMode /> : <DarkMode />}
             </IconButton>
