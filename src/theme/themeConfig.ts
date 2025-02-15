@@ -1,31 +1,31 @@
 import { Components } from '@mui/material';
 import { CustomThemeOptions } from './types';
 
-// Shared color palette
+// Shared color palette based on your design
 const colors = {
   blue: {
     50: '#E3F2FD',
-    100: '#BBDEFB',
-    200: '#90CAF9',
-    300: '#64B5F6',
-    400: '#42A5F5',
-    500: '#2196F3',
-    600: '#1E88E5',
-    700: '#1976D2',
-    800: '#1565C0',
-    900: '#0D47A1',
+    100: '#CDEBF7',
+    200: '#A5D8F3',
+    300: '#9fd3e0', // Updated to match extracted theme
+    400: '#9dcee6', // Lighter primary blue
+    500: '#9ecee7', // Main primary color
+    600: '#9fcde9',
+    700: '#85B8D0',
+    800: '#6AA2B6',
+    900: '#4F8D9C',
   },
   purple: {
     50: '#F3E5F5',
     100: '#E1BEE7',
-    200: '#CE93D8',
-    300: '#BA68C8',
-    400: '#AB47BC',
-    500: '#9C27B0',
-    600: '#8E24AA',
-    700: '#7B1FA2',
-    800: '#6A1B9A',
-    900: '#4A148C',
+    200: '#D1A7DA',
+    300: '#BE8EC8',
+    400: '#AA77B5',
+    500: '#9461A2',
+    600: '#7D4C8F',
+    700: '#65367D',
+    800: '#4E226A',
+    900: '#370D57',
   },
   slate: {
     50: '#F8FAFC',
@@ -71,7 +71,6 @@ const typography = {
 
 // Common component overrides
 const components: Components = {
-
   MuiButton: {
     styleOverrides: {
       root: () => ({
@@ -93,21 +92,21 @@ export const lightTheme: CustomThemeOptions = {
   palette: {
     mode: 'light',
     primary: {
-      main: colors.blue[500],
+      main: colors.blue[500], // Updated primary color
       light: colors.blue[300],
       dark: colors.blue[700],
     },
     secondary: {
-      main: colors.purple[500],
+      main: colors.purple[500], // Updated secondary color
       light: colors.purple[300],
       dark: colors.purple[700],
     },
     background: {
-      default: colors.slate[50],
-      paper: 'rgba(255, 255, 255, 0.8)',
+      default: '#ffffff', // Clean background matching design
+      paper: 'rgba(255, 255, 255, 0.9)',
     },
     text: {
-      primary: colors.slate[900],
+      primary: colors.slate[900], // Dark slate for contrast
       secondary: colors.slate[600],
     },
   },
@@ -138,21 +137,21 @@ export const darkTheme: CustomThemeOptions = {
   palette: {
     mode: 'dark',
     primary: {
-      main: colors.blue[400],
+      main: colors.blue[400], // Slightly lighter blue for contrast
       light: colors.blue[300],
       dark: colors.blue[600],
     },
     secondary: {
-      main: colors.purple[400],
+      main: colors.purple[400], // Adjusted secondary for better balance
       light: colors.purple[300],
       dark: colors.purple[600],
     },
     background: {
-      default: colors.slate[900],
-      paper: 'rgba(30, 41, 59, 0.8)',
+      default: colors.slate[900], // Deep blue-gray for dark mode
+      paper: 'rgba(30, 41, 59, 0.9)',
     },
     text: {
-      primary: colors.slate[100],
+      primary: colors.slate[100], // Light text for readability
       secondary: colors.slate[400],
     },
   },
@@ -177,4 +176,4 @@ export const darkTheme: CustomThemeOptions = {
       },
     },
   },
-}; 
+};

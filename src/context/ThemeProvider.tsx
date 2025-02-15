@@ -65,7 +65,46 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
               '100%': {
                 backgroundPosition: '0% 50%'
               }
-            }
+            },
+            '@keyframes morphing': {
+              '0%': {
+                borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+                transform: 'rotate(0deg)',
+              },
+              '50%': {
+                borderRadius: '70% 30% 30% 70% / 70% 70% 30% 30%',
+                transform: 'rotate(180deg)',
+              },
+              '100%': {
+                borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+                transform: 'rotate(360deg)',
+              }
+            },
+            '[data-scroll]': {
+              opacity: 0,
+              transform: 'translateY(20px)',
+              transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
+            },
+            '.scroll-visible': {
+              opacity: 1,
+              transform: 'translateY(0)',
+            },
+            '@keyframes float': {
+              '0%, 100%': {
+                transform: 'translateY(0)',
+              },
+              '50%': {
+                transform: 'translateY(-10px)',
+              },
+            },
+            '@keyframes pulse': {
+              '0%, 100%': {
+                transform: 'scale(1)',
+              },
+              '50%': {
+                transform: 'scale(1.05)',
+              },
+            },
           })}
         />
         {children}

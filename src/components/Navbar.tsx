@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Button, Container, IconButton, useTheme, Typography, Avatar } from "@mui/material";
+import { AppBar, Toolbar, Button, Container, IconButton, useTheme, Typography, Avatar, Box } from "@mui/material";
 import { useState, useEffect } from "react";
 import { LightMode, DarkMode } from "@mui/icons-material";
 import { useTheme as useCustomTheme } from "../context/ThemeContext";
@@ -39,136 +39,149 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [navItems]);
 
-  const scrollToSection = (section: string) => {
-    setActiveSection(section.toLowerCase());
-    const element = document.getElementById(section.toLowerCase());
-    element?.scrollIntoView({ behavior: "smooth" });
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 80; // Adjust this value based on your navbar height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleNavClick = (sectionId: string) => (event: React.MouseEvent) => {
+    event.preventDefault();
+    setActiveSection(sectionId);
+    scrollToSection(sectionId);
   };
 
   return (
     <AppBar 
       position="fixed" 
-      elevation={scrolled ? 1 : 0}
+      elevation={0}
       sx={{ 
-        backgroundColor: scrolled 
-          ? theme.palette.mode === 'dark'
-            ? 'rgba(18, 18, 18, 0.8)'
-            : 'rgba(255, 255, 255, 0.8)'
-          : 'transparent',
-        backdropFilter: scrolled ? 'blur(10px)' : 'none',
-        transition: 'all 0.3s ease-in-out',
+        background: 'transparent',
+        backdropFilter: scrolled ? 'blur(8px)' : 'none',
         borderBottom: scrolled 
           ? `1px solid ${theme.palette.mode === 'dark' 
-              ? 'rgba(255,255,255,0.05)' 
-              : 'rgba(0,0,0,0.05)'
-            }`
+              ? 'rgba(255, 255, 255, 0.05)' 
+              : 'rgba(0, 0, 0, 0.05)'}`
           : 'none',
       }}
     >
       <Container maxWidth="lg">
         <Toolbar 
           sx={{ 
-            py: scrolled ? 1 : 2,
+            py: scrolled ? 1 : 1.5,
             transition: 'all 0.3s ease-in-out'
           }}
           className="justify-between"
         >
-          <div className="flex items-center gap-3">
+          {/* Logo/Name Section */}
+          <Box 
+            className="flex items-center gap-3" 
+            sx={{ 
+              opacity: scrolled ? 1 : 0.95,
+              transition: 'opacity 0.3s ease'
+            }}
+          >
             <Avatar
               src={portfolioConfig.personal.avatar}
               sx={{
-                width: 40,
-                height: 40,
-                border: `2px solid ${theme.palette.primary.main}`,
+                width: 34,
+                height: 34,
+                border: `1.5px solid ${alpha(theme.palette.primary.main, 0.3)}`,
                 background: theme.palette.mode === 'dark'
                   ? 'linear-gradient(45deg, #82B1FF 30%, #2979FF 90%)'
                   : 'linear-gradient(45deg, #1976D2 30%, #2196F3 90%)',
+                transition: 'transform 0.3s ease',
+                '&:hover': {
+                  transform: 'scale(1.05)'
+                }
               }}
             >
               {portfolioConfig.personal.name.charAt(0)}
             </Avatar>
-            <Typography 
-              variant="h5" 
-              sx={{ 
-                background: theme.palette.mode === 'dark'
-                  ? 'linear-gradient(45deg, #82B1FF 30%, #2979FF 90%)'
-                  : 'linear-gradient(45deg, #1976D2 30%, #2196F3 90%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                fontWeight: 700,
-                letterSpacing: '-0.5px'
+            <Typography
+              variant="h6"
+              sx={{
+                fontSize: '1.1rem',
+                fontWeight: 600,
+                color: theme.palette.text.primary,
+                letterSpacing: '0.2px',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  color: theme.palette.primary.main
+                }
               }}
             >
               {portfolioConfig.personal.name}
             </Typography>
-          </div>
-          <div className="flex items-center gap-6">
-            <div className="hidden md:flex gap-1">
+          </Box>
+
+          {/* Navigation Items */}
+          <Box className="flex items-center gap-2">
+            <Box className="hidden md:flex">
               {navItems.map((item) => (
                 <Button
                   key={item}
-                  onClick={() => scrollToSection(item)}
+                  onClick={handleNavClick(item.toLowerCase())}
                   sx={{
-                    px: 2,
+                    mx: 1.5,
                     py: 1,
-                    color: theme.palette.text.primary,
+                    px: 1.5,
+                    color: activeSection === item.toLowerCase() 
+                      ? 'primary.main' 
+                      : 'text.primary',
+                    fontSize: '0.9rem',
+                    fontWeight: 500,
+                    letterSpacing: '0.3px',
+                    textTransform: 'none',
                     position: 'relative',
-                    overflow: 'hidden',
-                    '&::before': {
+                    '&::after': {
                       content: '""',
                       position: 'absolute',
                       bottom: 0,
-                      left: 0,
-                      width: '100%',
+                      left: '50%',
+                      width: activeSection === item.toLowerCase() ? '100%' : '0%',
                       height: '2px',
-                      bgcolor: 'primary.main',
-                      transform: activeSection === item.toLowerCase() 
-                        ? 'translateX(0)' 
-                        : 'translateX(-100%)',
-                      transition: 'transform 0.3s ease-in-out',
+                      backgroundColor: 'primary.main',
+                      transition: 'all 0.3s ease-in-out',
+                      transform: 'translateX(-50%)',
                     },
-                    '&:hover': {
-                      backgroundColor: theme.palette.mode === 'dark' 
-                        ? 'rgba(255,255,255,0.05)'
-                        : 'rgba(0,0,0,0.05)',
-                      '&::before': {
-                        transform: 'translateX(0)'
-                      }
-                    }
+                    '&:hover::after': {
+                      width: '100%',
+                    },
+                    transition: 'all 0.3s ease-in-out',
                   }}
                 >
                   {item}
                 </Button>
               ))}
-            </div>
+            </Box>
+
+            {/* Theme Toggle */}
             <IconButton
               onClick={toggleDarkMode}
-              sx={(theme) => ({ 
+              sx={{
+                ml: 2,
                 color: theme.palette.text.primary,
-                p: 1,
-                background: theme.palette.mode === 'dark'
-                  ? 'linear-gradient(45deg, rgba(130, 177, 255, 0.1) 30%, rgba(41, 121, 255, 0.1) 90%)'
-                  : 'linear-gradient(45deg, rgba(25, 118, 210, 0.1) 30%, rgba(33, 150, 243, 0.1) 90%)',
-                border: `0.5px solid ${theme.palette.mode === 'dark' 
-                  ? alpha(theme.palette.primary.main, 0.2)
-                  : alpha(theme.palette.primary.main, 0.2)}`,
-                borderRadius: theme.shape.borderRadius * 2,
-                transition: theme.transitions.create(['transform', 'background', 'box-shadow'], {
-                  duration: theme.transitions.duration.standard
-                }),
+                opacity: 0.7,
+                transition: 'all 0.2s ease-in-out',
                 '&:hover': {
-                  transform: 'translateY(-2px)',
-                  background: theme.palette.mode === 'dark'
-                    ? 'linear-gradient(45deg, rgba(130, 177, 255, 0.2) 30%, rgba(41, 121, 255, 0.2) 90%)'
-                    : 'linear-gradient(45deg, rgba(25, 118, 210, 0.2) 30%, rgba(33, 150, 243, 0.2) 90%)',
-                  boxShadow: `0 4px 20px ${alpha(theme.palette.primary.main, 0.4)}`
+                  opacity: 1,
+                  backgroundColor: 'transparent',
+                  transform: 'rotate(10deg)'
                 }
-                
-              })}
+              }}
             >
-              {darkMode ? <LightMode /> : <DarkMode />}
+              {darkMode ? <LightMode sx={{ fontSize: 20 }} /> : <DarkMode sx={{ fontSize: 20 }} />}
             </IconButton>
-          </div>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>

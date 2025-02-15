@@ -127,7 +127,7 @@ export const portfolioConfig = {
 
   // Footer
   footer: {
-    copyright: "© 2024 Uday Kiran. All rights reserved.",
+    copyright: "© 2025 Uday Kiran. All rights reserved.",
     socialLinks: [
       { icon: GitHub, url: "https://github.com/udaykiranch2" },
       { icon: LinkedIn, url: "https://www.linkedin.com/in/uday-kiran-2173a8288/" },
