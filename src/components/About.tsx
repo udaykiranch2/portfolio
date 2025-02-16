@@ -7,7 +7,19 @@ const About = () => {
   const { about } = portfolioConfig;
 
   return (
-    <Container id="about" sx={{ position: 'relative', py: 8, scrollMarginTop: '80px' }}>
+    <Container 
+      id="about" 
+      sx={{ 
+        position: 'relative',
+        minHeight: '100vh',
+        py: { xs: 12, md: 16 },
+        scrollMarginTop: '80px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        mb: 8,
+      }}
+    >
       <FadeInSection>
         <Typography
           variant="h4"
@@ -18,7 +30,6 @@ const About = () => {
             textTransform: 'uppercase',
             letterSpacing: theme.spacing(0.1),
             position: 'relative',
-            // display: 'inline-block',
             animation: 'slideIn 1s ease-out',
             '@keyframes slideIn': {
               from: { opacity: 0, transform: 'translateX(-20px)' },

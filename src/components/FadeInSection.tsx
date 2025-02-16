@@ -37,8 +37,9 @@ const FadeInSection = ({ children, delay = 0 }: FadeInSectionProps) => {
       sx={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translateY(0)' : 'translateY(50px)',
-        transition: `all 0.8s ease-out ${delay}s`,
-        willChange: 'opacity, transform'
+        transition: `opacity 0.8s ease-out ${delay}s, transform 0.8s ease-out ${delay}s`,
+        willChange: 'opacity, transform',
+        position: 'relative'
       }}
     >
       {children}

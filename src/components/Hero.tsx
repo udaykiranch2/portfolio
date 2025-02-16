@@ -17,7 +17,8 @@ const Hero = () => {
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
-        scrollMarginTop: '80px'
+        scrollMarginTop: '80px',
+        py:{ xs: 12, md: 16 },
       }}
     >
       <GradientBackground />

@@ -134,6 +134,12 @@ export const portfolioConfig = {
       { icon: X, url: "https://x.com/Udaykir99608813" },
     ],
   },
+  resume: {
+    title: "Resume",
+    subtitle: "Download My Resume",
+    button: "Download Resume",
+    link: "https://drive.google.com/file/d/12QZf-2YFoE93d8MWRSJ8fbyZbhMcItFN/view?usp=drive_link",
+  }
 };
 
 export default portfolioConfig; 

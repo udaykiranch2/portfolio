@@ -1,10 +1,11 @@
 import { AppBar, Toolbar, Button, Container, IconButton, useTheme, Typography, Avatar, Box } from "@mui/material";
 import { useState, useEffect } from "react";
-import { LightMode, DarkMode } from "@mui/icons-material";
+import { LightMode, DarkMode, Download } from "@mui/icons-material";
 import { useTheme as useCustomTheme } from "../context/ThemeContext";
 import { portfolioConfig } from "../config/portfolio.config";
 import { alpha } from "@mui/material/styles";
 // import image from "../assets/meAi.png";
+import resume from "../assets/resume.pdf";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -163,6 +164,35 @@ const Navbar = () => {
                 </Button>
               ))}
             </Box>
+
+            {/* Resume Button */}
+            <Button
+              variant="outlined"
+              href={portfolioConfig.resume.link}
+              target="_blank"
+              startIcon={<Download />}
+              sx={{
+                ml: 2,
+                px: 2,
+                py: 0.7,
+                borderRadius: '8px',
+                textTransform: 'none',
+                fontSize: '0.9rem',
+                fontWeight: 500,
+                borderColor: theme.palette.mode === 'dark' 
+                  ? 'rgba(255, 255, 255, 0.12)' 
+                  : 'rgba(0, 0, 0, 0.12)',
+                color: 'text.primary',
+                '&:hover': {
+                  borderColor: 'primary.main',
+                  backgroundColor: 'transparent',
+                  transform: 'translateY(-2px)'
+                },
+                transition: 'all 0.2s ease-in-out'
+              }}
+            >
+              Resume
+            </Button>
 
             {/* Theme Toggle */}
             <IconButton

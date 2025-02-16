@@ -51,12 +51,20 @@ const Contact = () => {
   };
 
   return (
-    <Container id="contact" sx={{ position: 'relative', py: 8, scrollMarginTop: '80px' }}>
+    <Container id="contact"
+      sx={{
+        position: 'relative',
+        minHeight: '100vh',
+        py: { xs: 12, md: 16 },
+        scrollMarginTop: '80px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        mb: 8,
+      }}>
       <AnimatedBackground
         variant="mesh"
         opacity={0.04}
-        speed={0.007}
-        color={theme.palette.secondary.main}
       />
       <FadeInSection>
         <Typography

@@ -50,12 +50,20 @@ const Projects = () => {
   };
 
   return (
-    <Container id="projects" sx={{ position: 'relative', py: 8, scrollMarginTop: '80px' }}>
+    <Container id="projects" 
+      sx={{ 
+        position: 'relative',
+        minHeight: '100vh',
+        py: { xs: 12, md: 16 },
+        scrollMarginTop: '80px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        mb: 8,
+      }}>
       <AnimatedBackground 
         variant="waves" 
         opacity={0.07}
-        speed={0.003}
-        color={theme.palette.primary.main}
       />
       <FadeInSection>
         <Typography 

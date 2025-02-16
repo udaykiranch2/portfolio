@@ -27,8 +27,13 @@ const Skills = () => {
       id="skills" 
       sx={{ 
         position: 'relative', 
-        py: 8,
-        scrollMarginTop: '80px'
+        minHeight: '100vh',
+        py: { xs: 12, md: 16 },
+        scrollMarginTop: '80px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        mb: 8,
       }}
     >
       <AnimatedBackground 

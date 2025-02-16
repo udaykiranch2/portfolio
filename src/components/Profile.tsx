@@ -12,6 +12,7 @@ const Profile = () => {
         maxWidth: '600px',
         perspective: '1000px',
         margin: '0 auto',
+        py: { xs: 12, md: 16 },
       }}
     >
       <Box
