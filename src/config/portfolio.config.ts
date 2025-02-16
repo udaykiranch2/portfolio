@@ -127,13 +127,19 @@ export const portfolioConfig = {
 
   // Footer
   footer: {
-    copyright: "© 2024 Uday Kiran. All rights reserved.",
+    copyright: "© 2025 Uday Kiran. All rights reserved.",
     socialLinks: [
       { icon: GitHub, url: "https://github.com/udaykiranch2" },
       { icon: LinkedIn, url: "https://www.linkedin.com/in/uday-kiran-2173a8288/" },
       { icon: X, url: "https://x.com/Udaykir99608813" },
     ],
   },
+  resume: {
+    title: "Resume",
+    subtitle: "Download My Resume",
+    button: "Download Resume",
+    link: "https://drive.google.com/file/d/12QZf-2YFoE93d8MWRSJ8fbyZbhMcItFN/view?usp=drive_link",
+  }
 };
 
 export default portfolioConfig; 
