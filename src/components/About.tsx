@@ -7,9 +7,9 @@ const About = () => {
   const { about } = portfolioConfig;
 
   return (
-    <Container 
-      id="about" 
-      sx={{ 
+    <Container
+      id="about"
+      sx={{
         position: 'relative',
         minHeight: '100vh',
         py: { xs: 12, md: 16 },

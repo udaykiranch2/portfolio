@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import meAi from '../assets/meAi.png';
 
 const Profile = () => {
-//   const theme = useTheme();
+  //   const theme = useTheme();
 
   return (
     <Box

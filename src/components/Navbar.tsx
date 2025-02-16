@@ -4,8 +4,6 @@ import { LightMode, DarkMode, Download } from "@mui/icons-material";
 import { useTheme as useCustomTheme } from "../context/ThemeContext";
 import { portfolioConfig } from "../config/portfolio.config";
 import { alpha } from "@mui/material/styles";
-// import image from "../assets/meAi.png";
-import resume from "../assets/resume.pdf";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");

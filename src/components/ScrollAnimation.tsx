@@ -4,11 +4,11 @@ const ScrollAnimation = () => {
   useEffect(() => {
     const handleScroll = () => {
       const elements = document.querySelectorAll('[data-scroll]');
-      
+
       elements.forEach(element => {
         const rect = element.getBoundingClientRect();
         const isVisible = rect.top < window.innerHeight * 0.8;
-        
+
         if (isVisible) {
           element.classList.add('scroll-visible');
         }

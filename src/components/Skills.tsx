@@ -1,4 +1,4 @@
-import { Container, Typography, Grid2, Paper, useTheme, Theme, Grid } from "@mui/material";
+import { Container, Typography, Grid2, Paper, useTheme, Theme } from "@mui/material";
 import { portfolioConfig } from '../config/portfolio.config';
 import FadeInSection from './FadeInSection';
 import AnimatedBackground from './AnimatedBackground';

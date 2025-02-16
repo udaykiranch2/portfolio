@@ -5,7 +5,6 @@ import FadeInSection from './FadeInSection';
 const Footer = () => {
   const theme = useTheme();
   const { footer } = portfolioConfig;
-  const currentYear = new Date().getFullYear();
 
   return (
     <footer>

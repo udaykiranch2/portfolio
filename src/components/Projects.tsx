@@ -18,8 +18,8 @@ import AnimatedBackground from './AnimatedBackground';
 const Projects = () => {
   const theme = useTheme();
   const { projects } = portfolioConfig;
-  const [expandedDescriptions, setExpandedDescriptions] = useState<{[key: string]: boolean}>({});
-  const [flippedCards, setFlippedCards] = useState<{[key: string]: boolean}>({});
+  const [expandedDescriptions, setExpandedDescriptions] = useState<{ [key: string]: boolean }>({});
+  const [flippedCards, setFlippedCards] = useState<{ [key: string]: boolean }>({});
 
   const toggleDescription = (title: string) => {
     setExpandedDescriptions(prev => ({
@@ -36,11 +36,11 @@ const Projects = () => {
   };
 
   const getProjectIcon = (title: string) => {
-    const iconStyle = { 
+    const iconStyle = {
       color: theme.palette.primary.main,
       marginRight: 1
     };
-    
+
     if (title.toLowerCase().includes('e-commerce')) {
       return <ShoppingCart sx={iconStyle} />;
     } else if (title.toLowerCase().includes('task')) {
@@ -50,8 +50,8 @@ const Projects = () => {
   };
 
   return (
-    <Container id="projects" 
-      sx={{ 
+    <Container id="projects"
+      sx={{
         position: 'relative',
         minHeight: '100vh',
         py: { xs: 12, md: 16 },
@@ -61,43 +61,43 @@ const Projects = () => {
         justifyContent: 'center',
         mb: 8,
       }}>
-      <AnimatedBackground 
-        variant="waves" 
+      <AnimatedBackground
+        variant="waves"
         opacity={0.07}
       />
       <FadeInSection>
-        <Typography 
-         variant="h4" 
-         sx={(theme: any) => ({ 
-           textAlign: 'center',
-           color: 'primary.main', 
-           fontWeight: 500,
-           textTransform: 'uppercase',
-           letterSpacing: theme.spacing(0.1),
-           position: 'relative',
-           // display: 'inline-block',
-           animation: 'slideIn 1s ease-out',
-           '@keyframes slideIn': {
-             from: { opacity: 0, transform: 'translateX(-20px)' },
-             to: { opacity: 1, transform: 'translateX(0)' }
-           },
-           '&::after': {
-             content: '""',
-             position: 'absolute',
-             bottom: theme.spacing(-1),
-             left: '50%',
-             transform: 'translateX(-50%)',
-             width: '2em',
-             height: '2px',
-             bgcolor: 'primary.main',
-             animation: 'widthGrow 0.5s ease-out 0.5s forwards',
-             '@keyframes widthGrow': {
-               from: { width: 0 },
-               to: { width: '4em' }
-             }
-           },
-           mb: 3
-         })}
+        <Typography
+          variant="h4"
+          sx={(theme: any) => ({
+            textAlign: 'center',
+            color: 'primary.main',
+            fontWeight: 500,
+            textTransform: 'uppercase',
+            letterSpacing: theme.spacing(0.1),
+            position: 'relative',
+            // display: 'inline-block',
+            animation: 'slideIn 1s ease-out',
+            '@keyframes slideIn': {
+              from: { opacity: 0, transform: 'translateX(-20px)' },
+              to: { opacity: 1, transform: 'translateX(0)' }
+            },
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              bottom: theme.spacing(-1),
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '2em',
+              height: '2px',
+              bgcolor: 'primary.main',
+              animation: 'widthGrow 0.5s ease-out 0.5s forwards',
+              '@keyframes widthGrow': {
+                from: { width: 0 },
+                to: { width: '4em' }
+              }
+            },
+            mb: 3
+          })}
         >
           {projects.title}
         </Typography>
@@ -139,7 +139,7 @@ const Projects = () => {
                         ? 'linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.6))'
                         : 'linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7))',
                       backdropFilter: 'blur(10px)',
-                      border: `1px solid ${theme.palette.mode === 'dark' 
+                      border: `1px solid ${theme.palette.mode === 'dark'
                         ? 'rgba(255, 255, 255, 0.1)'
                         : 'rgba(255, 255, 255, 0.7)'}`,
                       borderRadius: '16px',
@@ -156,7 +156,7 @@ const Projects = () => {
                       height="100%"
                       image={project.image}
                       alt={project.title}
-                      sx={{ 
+                      sx={{
                         objectFit: 'cover',
                         height: '300px',
                         width: '100%'
@@ -176,7 +176,7 @@ const Projects = () => {
                         ? 'linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))'
                         : 'linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95))',
                       backdropFilter: 'blur(16px)',
-                      border: `1px solid ${theme.palette.mode === 'dark' 
+                      border: `1px solid ${theme.palette.mode === 'dark'
                         ? 'rgba(255, 255, 255, 0.1)'
                         : 'rgba(255, 255, 255, 0.7)'}`,
                       borderRadius: '16px',
@@ -189,30 +189,30 @@ const Projects = () => {
                       }
                     }}
                   >
-                    <CardContent 
-                      sx={{ 
+                    <CardContent
+                      sx={{
                         height: '100%',
-                        display: 'flex', 
+                        display: 'flex',
                         flexDirection: 'column',
                         p: 2.5,
                       }}
                     >
-                      <Box sx={{ 
-                        display: 'flex', 
-                        alignItems: 'center', 
+                      <Box sx={{
+                        display: 'flex',
+                        alignItems: 'center',
                         mb: 2,
-                        background: theme.palette.mode === 'dark' 
+                        background: theme.palette.mode === 'dark'
                           ? 'rgba(15, 23, 42, 0.5)'
                           : 'rgba(255, 255, 255, 0.5)',
                         padding: '8px 12px',
                         borderRadius: '8px',
                       }}>
                         {getProjectIcon(project.title)}
-                        <Typography 
-                          variant="h6" 
-                          sx={{ 
-                            color: theme.palette.mode === 'dark' 
-                              ? '#F1F5F9' 
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            color: theme.palette.mode === 'dark'
+                              ? '#F1F5F9'
                               : '#0F172A',
                             fontWeight: 600,
                             letterSpacing: '0.5px'
@@ -221,15 +221,15 @@ const Projects = () => {
                           {project.title}
                         </Typography>
                       </Box>
-                      
-                      <Typography 
+
+                      <Typography
                         onClick={(e) => {
                           e.stopPropagation();
                           toggleDescription(project.title);
                         }}
-                        sx={{ 
-                          mb: 2, 
-                          color: theme.palette.mode === 'dark' 
+                        sx={{
+                          mb: 2,
+                          color: theme.palette.mode === 'dark'
                             ? '#E2E8F0'
                             : '#334155',
                           lineHeight: 1.6,
@@ -248,11 +248,11 @@ const Projects = () => {
                         {project.description}
                       </Typography>
 
-                      <Box 
-                        className="flex flex-wrap gap-1.5 mb-3" 
-                        sx={{ 
+                      <Box
+                        className="flex flex-wrap gap-1.5 mb-3"
+                        sx={{
                           flex: 1,
-                          background: theme.palette.mode === 'dark' 
+                          background: theme.palette.mode === 'dark'
                             ? 'rgba(15, 23, 42, 0.3)'
                             : 'rgba(248, 250, 252, 0.5)',
                           p: 1.5,
@@ -267,7 +267,7 @@ const Projects = () => {
                               borderRadius: '6px',
                               fontSize: '0.75rem',
                               fontWeight: 500,
-                              backgroundColor: theme.palette.mode === 'dark' 
+                              backgroundColor: theme.palette.mode === 'dark'
                                 ? 'rgba(51, 65, 85, 0.8)'
                                 : 'rgba(241, 245, 249, 0.8)',
                               color: theme.palette.primary.main,
@@ -282,12 +282,12 @@ const Projects = () => {
                         ))}
                       </Box>
 
-                      <Box 
-                        className="flex gap-4" 
-                        sx={{ 
+                      <Box
+                        className="flex gap-4"
+                        sx={{
                           mt: 'auto',
                           pt: 1,
-                          borderTop: `1px solid ${theme.palette.mode === 'dark' 
+                          borderTop: `1px solid ${theme.palette.mode === 'dark'
                             ? 'rgba(255, 255, 255, 0.1)'
                             : 'rgba(0, 0, 0, 0.1)'}`
                         }}
@@ -297,13 +297,13 @@ const Projects = () => {
                           href={project.githubLink}
                           target="_blank"
                           onClick={(e) => e.stopPropagation()}
-                          sx={{ 
-                            color: theme.palette.mode === 'dark' 
+                          sx={{
+                            color: theme.palette.mode === 'dark'
                               ? '#E2E8F0'
                               : '#334155',
                             '&:hover': {
                               color: theme.palette.primary.main,
-                              background: theme.palette.mode === 'dark' 
+                              background: theme.palette.mode === 'dark'
                                 ? 'rgba(255, 255, 255, 0.05)'
                                 : 'rgba(0, 0, 0, 0.05)'
                             }
@@ -316,13 +316,13 @@ const Projects = () => {
                           href={project.liveLink}
                           target="_blank"
                           onClick={(e) => e.stopPropagation()}
-                          sx={{ 
-                            color: theme.palette.mode === 'dark' 
+                          sx={{
+                            color: theme.palette.mode === 'dark'
                               ? '#E2E8F0'
                               : '#334155',
                             '&:hover': {
                               color: theme.palette.primary.main,
-                              background: theme.palette.mode === 'dark' 
+                              background: theme.palette.mode === 'dark'
                                 ? 'rgba(255, 255, 255, 0.05)'
                                 : 'rgba(0, 0, 0, 0.05)'
                             }

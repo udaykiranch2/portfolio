@@ -9,29 +9,29 @@ const Hero = () => {
   const { hero, personal } = portfolioConfig;
 
   return (
-    <Container 
-      id="home" 
-      sx={{ 
+    <Container
+      id="home"
+      sx={{
         minHeight: '100vh',
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
         scrollMarginTop: '80px',
-        py:{ xs: 12, md: 16 },
+        py: { xs: 12, md: 16 },
       }}
     >
       <GradientBackground />
-      
+
       <FadeInSection>
         <Grid2 container spacing={4} alignItems="center">
           <Grid2 size={{ xs: 12, md: 6 }}>
             <Box sx={{ position: 'relative' }}>
-              
-              <Typography 
-                variant="h5" 
-                sx={(theme: any) => ({ 
-                  color: 'primary.main', 
+
+              <Typography
+                variant="h5"
+                sx={(theme: any) => ({
+                  color: 'primary.main',
                   fontWeight: 500,
                   textTransform: 'uppercase',
                   letterSpacing: theme.spacing(0.1),
@@ -61,7 +61,7 @@ const Hero = () => {
               >
                 {hero.greeting}
               </Typography>
-              <Typography 
+              <Typography
                 variant="h1"
                 sx={(theme: any) => ({
                   fontWeight: 800,
@@ -109,9 +109,9 @@ const Hero = () => {
               >
                 {personal.name}
               </Typography>
-              <Typography 
-                variant="h2" 
-                sx={(theme: any) => ({ 
+              <Typography
+                variant="h2"
+                sx={(theme: any) => ({
                   color: 'text.secondary',
                   fontSize: {
                     xs: theme.typography.h4.fontSize,
@@ -125,9 +125,9 @@ const Hero = () => {
                 {personal.title}
               </Typography>
 
-              <Typography 
-                variant="body1" 
-                sx={(theme: any) => ({ 
+              <Typography
+                variant="body1"
+                sx={(theme: any) => ({
                   color: 'text.secondary',
                   maxWidth: theme.spacing(45),
                   fontSize: {
@@ -142,9 +142,9 @@ const Hero = () => {
                 {hero.tagline}
               </Typography>
 
-              <Box sx={{ 
-                display: 'flex', 
-                gap: 3, 
+              <Box sx={{
+                display: 'flex',
+                gap: 3,
                 mt: { xs: 4, md: 5 },
                 animation: 'fadeIn 1s ease-out 1.2s both'
               }}>
@@ -205,7 +205,7 @@ const Hero = () => {
                     fontWeight: 500,
                     letterSpacing: '0.3px',
                     borderWidth: '1.5px',
-                    borderColor: theme.palette.mode === 'dark' 
+                    borderColor: theme.palette.mode === 'dark'
                       ? alpha(theme.palette.primary.main, 0.5)
                       : theme.palette.primary.main,
                     color: theme.palette.primary.main,
@@ -229,9 +229,9 @@ const Hero = () => {
                 </Button>
               </Box>
 
-              <Box sx={(theme: any) => ({ 
-                display: 'flex', 
-                gap: 3, 
+              <Box sx={(theme: any) => ({
+                display: 'flex',
+                gap: 3,
                 mt: 4,
                 animation: 'fadeIn 1s ease-out 1.5s both',
                 '& > *': {
@@ -268,7 +268,7 @@ const Hero = () => {
               </Box>
             </Box>
           </Grid2>
-          
+
           <Grid2 size={{ xs: 12, md: 6 }}>
             <Box
               sx={{

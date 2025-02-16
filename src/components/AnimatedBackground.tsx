@@ -8,8 +8,8 @@ interface AnimatedBackgroundProps {
   color?: string;
 }
 
-const AnimatedBackground = ({ 
-  variant = 'mesh', 
+const AnimatedBackground = ({
+  variant = 'mesh',
   opacity = 0.1,
   speed = 0.005,
   color
