@@ -5,6 +5,42 @@ import { useTheme as useCustomTheme } from "../context/ThemeContext";
 import { portfolioConfig } from "../config/portfolio.config";
 import { alpha } from "@mui/material/styles";
 
+const NavButton = ({ item, isActive, onClick }: { item: string, isActive: boolean, onClick: () => void }) => {
+  return (
+    <Button
+      onClick={onClick}
+      sx={(theme) => ({
+        mx: 1.5,
+        py: 1,
+        px: 1.5,
+        color: isActive ? 'primary.main' : 'text.primary',
+        fontSize: '0.9rem',
+        fontWeight: 500,
+        letterSpacing: '0.3px',
+        textTransform: 'none',
+        position: 'relative',
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          bottom: 0,
+          left: '50%',
+          width: isActive ? '100%' : '0%',
+          height: '2px',
+          backgroundColor: 'primary.main',
+          transition: 'all 0.3s ease-in-out',
+          transform: 'translateX(-50%)',
+        },
+        '&:hover::after': {
+          width: '100%',
+        },
+        transition: 'all 0.3s ease-in-out',
+      })}
+    >
+      {item}
+    </Button>
+  );
+};
+
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
@@ -126,40 +162,12 @@ const Navbar = () => {
           <Box className="flex items-center gap-2">
             <Box className="hidden md:flex">
               {navItems.map((item) => (
-                <Button
+                <NavButton
                   key={item}
-                  onClick={handleNavClick(item.toLowerCase())}
-                  sx={{
-                    mx: 1.5,
-                    py: 1,
-                    px: 1.5,
-                    color: activeSection === item.toLowerCase() 
-                      ? 'primary.main' 
-                      : 'text.primary',
-                    fontSize: '0.9rem',
-                    fontWeight: 500,
-                    letterSpacing: '0.3px',
-                    textTransform: 'none',
-                    position: 'relative',
-                    '&::after': {
-                      content: '""',
-                      position: 'absolute',
-                      bottom: 0,
-                      left: '50%',
-                      width: activeSection === item.toLowerCase() ? '100%' : '0%',
-                      height: '2px',
-                      backgroundColor: 'primary.main',
-                      transition: 'all 0.3s ease-in-out',
-                      transform: 'translateX(-50%)',
-                    },
-                    '&:hover::after': {
-                      width: '100%',
-                    },
-                    transition: 'all 0.3s ease-in-out',
-                  }}
-                >
-                  {item}
-                </Button>
+                  item={item}
+                  isActive={activeSection === item.toLowerCase()}
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                />
               ))}
             </Box>
 

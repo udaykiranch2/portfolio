@@ -2,20 +2,17 @@ import { Container, Typography, Grid2, Paper, useTheme, Theme } from "@mui/mater
 import { portfolioConfig } from '../config/portfolio.config';
 import FadeInSection from './FadeInSection';
 import AnimatedBackground from './AnimatedBackground';
+import SectionTitle from './common/SectionTitle';
+import { sectionContainerStyle, glassmorphismStyle } from '../styles/commonStyles';
 
 const getIconColor = (theme: Theme, color: string) => {
-  switch (color) {
-    case "primary":
-      return theme.palette.primary.main;
-    case "secondary":
-      return theme.palette.secondary.main;
-    case "warning":
-      return theme.palette.warning.main;
-    case "info":
-      return theme.palette.info.main;
-    default:
-      return theme.palette.text.primary;
-  }
+  const colorMap = {
+    primary: theme.palette.primary.main,
+    secondary: theme.palette.secondary.main,
+    warning: theme.palette.warning.main,
+    info: theme.palette.info.main,
+  };
+  return colorMap[color as keyof typeof colorMap] || theme.palette.text.primary;
 };
 
 const Skills = () => {
@@ -23,61 +20,14 @@ const Skills = () => {
   const { skills } = portfolioConfig;
 
   return (
-    <Container 
-      id="skills" 
-      sx={{ 
-        position: 'relative', 
-        minHeight: '100vh',
-        py: { xs: 12, md: 16 },
-        scrollMarginTop: '80px',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        mb: 8,
-      }}
-    >
+    <Container id="skills" sx={sectionContainerStyle}>
       <AnimatedBackground 
         variant="dots" 
         opacity={0.05} 
         color={theme.palette.secondary.main}
       />
       <FadeInSection>
-        <Typography 
-        
-            variant="h4" 
-            sx={(theme: any) => ({ 
-              textAlign: 'center',
-              color: 'primary.main', 
-              fontWeight: 500,
-              textTransform: 'uppercase',
-              letterSpacing: theme.spacing(0.1),
-              position: 'relative',
-              // display: 'inline-block',
-              animation: 'slideIn 1s ease-out',
-              '@keyframes slideIn': {
-                from: { opacity: 0, transform: 'translateX(-20px)' },
-                to: { opacity: 1, transform: 'translateX(0)' }
-              },
-              '&::after': {
-                content: '""',
-                position: 'absolute',
-                bottom: theme.spacing(-1),
-                left: '50%',
-                transform: 'translateX(-50%)',
-                width: '2em',
-                height: '2px',
-                bgcolor: 'primary.main',
-                animation: 'widthGrow 0.5s ease-out 0.5s forwards',
-                '@keyframes widthGrow': {
-                  from: { width: 0 },
-                  to: { width: '4em' }
-                }
-              },
-              mb: 3
-            })}
-        >
-          {skills.title}
-        </Typography>
+        <SectionTitle title={skills.title} />
       </FadeInSection>
       <Grid2 container spacing={2}>
         {skills.categories.map((category, index) => {
@@ -89,16 +39,8 @@ const Skills = () => {
                   sx={{
                     p: 2.5,
                     height: '100%',
-                    background: theme.palette.mode === 'dark'
-                      ? 'linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(30, 41, 59, 0.4))'
-                      : 'linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6))',
-                    backdropFilter: 'blur(10px)',
-                    border: `1px solid ${theme.palette.mode === 'dark' 
-                      ? 'rgba(255, 255, 255, 0.1)'
-                      : 'rgba(255, 255, 255, 0.7)'}`,
-                    color: theme.palette.text.primary,
+                    ...glassmorphismStyle(theme),
                     transition: 'transform 0.2s, box-shadow 0.3s ease-in-out',
-                    borderRadius: '16px',
                     '&:hover': {
                       transform: 'translateY(-5px)',
                       boxShadow: theme.palette.mode === 'dark'
@@ -108,13 +50,7 @@ const Skills = () => {
                   }}
                   elevation={0}
                 >
-                  <div style={{ 
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    alignItems: 'center', 
-                    textAlign: 'center',
-                    gap: '12px'
-                  }}>
+                  <div className="flex flex-col items-center text-center gap-3">
                     <Icon
                       sx={{ 
                         fontSize: '2rem',
@@ -144,12 +80,7 @@ const Skills = () => {
                     >
                       {category.category}
                     </Typography>
-                    <div style={{ 
-                      display: 'flex', 
-                      flexDirection: 'column', 
-                      gap: '8px',
-                      marginTop: '4px'
-                    }}>
+                    <div className="flex flex-col gap-2 mt-1">
                       {category.skills.map((skill) => (
                         <Typography
                           key={skill}
@@ -170,7 +101,7 @@ const Skills = () => {
             </Grid2>
           );
         })}
-      </Grid2 >
+      </Grid2>
     </Container>
   );
 };  

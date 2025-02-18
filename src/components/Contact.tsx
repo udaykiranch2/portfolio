@@ -8,7 +8,8 @@ import {
   useTheme,
   Snackbar,
   CircularProgress,
-  Alert
+  Alert,
+  Box
 } from "@mui/material";
 import { Email, Phone, LocationOn } from "@mui/icons-material";
 import { portfolioConfig } from '../config/portfolio.config';
@@ -16,6 +17,23 @@ import FadeInSection from "./FadeInSection";
 import emailjs from '@emailjs/browser';
 import { useRef, useState } from "react";
 import AnimatedBackground from './AnimatedBackground';
+import SectionTitle from './common/SectionTitle';
+import { sectionContainerStyle, glassmorphismStyle } from '../styles/commonStyles';
+
+const ContactInfo = ({ icon: Icon, text }: { icon: typeof Email, text: string }) => {
+  const theme = useTheme();
+  return (
+    <div className="flex items-center gap-4">
+      <Icon sx={{
+        color: theme.palette.primary.main,
+        fontSize: 28
+      }} />
+      <Typography variant="body1" sx={{ color: theme.palette.text.primary }}>
+        {text}
+      </Typography>
+    </div>
+  );
+};
 
 const Contact = () => {
   const theme = useTheme();
@@ -30,7 +48,6 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add form submission logic here
     if (!form.current) return;
     setIsSubmitting(true);
     try {
@@ -50,58 +67,17 @@ const Contact = () => {
     }
   };
 
+  const contactInfos = [
+    { icon: Email, text: personal.email },
+    { icon: Phone, text: personal.phone },
+    { icon: LocationOn, text: personal.location }
+  ];
+
   return (
-    <Container id="contact"
-      sx={{
-        position: 'relative',
-        minHeight: '100vh',
-        py: { xs: 12, md: 16 },
-        scrollMarginTop: '80px',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        mb: 8,
-      }}>
-      <AnimatedBackground
-        variant="mesh"
-        opacity={0.04}
-      />
+    <Container id="contact" sx={sectionContainerStyle}>
+      <AnimatedBackground variant="mesh" opacity={0.04} />
       <FadeInSection>
-        <Typography
-          variant="h4"
-          sx={(theme: any) => ({
-            textAlign: 'center',
-            color: 'primary.main',
-            fontWeight: 500,
-            textTransform: 'uppercase',
-            letterSpacing: theme.spacing(0.1),
-            position: 'relative',
-            // display: 'inline-block',
-            animation: 'slideIn 1s ease-out',
-            '@keyframes slideIn': {
-              from: { opacity: 0, transform: 'translateX(-20px)' },
-              to: { opacity: 1, transform: 'translateX(0)' }
-            },
-            '&::after': {
-              content: '""',
-              position: 'absolute',
-              bottom: theme.spacing(-1),
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '2em',
-              height: '2px',
-              bgcolor: 'primary.main',
-              animation: 'widthGrow 0.5s ease-out 0.5s forwards',
-              '@keyframes widthGrow': {
-                from: { width: 0 },
-                to: { width: '4em' }
-              }
-            },
-            mb: 3
-          })}
-        >
-          {contact.title}
-        </Typography>
+        <SectionTitle title={contact.title} />
       </FadeInSection>
       <Grid2 container spacing={4}>
         <Grid2 size={{ xs: 12, md: 5 }}>
@@ -111,14 +87,7 @@ const Contact = () => {
               sx={{
                 p: 4,
                 height: '100%',
-                background: theme.palette.mode === 'dark'
-                  ? 'linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.6))'
-                  : 'linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7))',
-                backdropFilter: 'blur(10px)',
-                border: `1px solid ${theme.palette.mode === 'dark'
-                  ? 'rgba(255, 255, 255, 0.1)'
-                  : 'rgba(255, 255, 255, 0.7)'}`,
-                borderRadius: '16px',
+                ...glassmorphismStyle(theme),
                 transition: 'transform 0.2s, box-shadow 0.3s ease-in-out',
                 '&:hover': {
                   transform: 'translateY(-5px)',
@@ -138,35 +107,11 @@ const Contact = () => {
               >
                 {contact.subtitle}
               </Typography>
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <Email sx={{
-                    color: theme.palette.primary.main,
-                    fontSize: 28
-                  }} />
-                  <Typography variant="body1" sx={{ color: theme.palette.text.primary }}>
-                    {personal.email}
-                  </Typography>
-                </div>
-                <div className="flex items-center gap-4">
-                  <Phone sx={{
-                    color: theme.palette.primary.main,
-                    fontSize: 28
-                  }} />
-                  <Typography variant="body1" sx={{ color: theme.palette.text.primary }}>
-                    {personal.phone}
-                  </Typography>
-                </div>
-                <div className="flex items-center gap-4">
-                  <LocationOn sx={{
-                    color: theme.palette.primary.main,
-                    fontSize: 28
-                  }} />
-                  <Typography variant="body1" sx={{ color: theme.palette.text.primary }}>
-                    {personal.location}
-                  </Typography>
-                </div>
-              </div>
+              <Box className="space-y-6">
+                {contactInfos.map((info, index) => (
+                  <ContactInfo key={index} icon={info.icon} text={info.text} />
+                ))}
+              </Box>
             </Paper>
           </FadeInSection>
         </Grid2>
@@ -176,14 +121,7 @@ const Contact = () => {
               elevation={0}
               sx={{
                 p: 4,
-                background: theme.palette.mode === 'dark'
-                  ? 'linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.6))'
-                  : 'linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7))',
-                backdropFilter: 'blur(10px)',
-                border: `1px solid ${theme.palette.mode === 'dark'
-                  ? 'rgba(255, 255, 255, 0.1)'
-                  : 'rgba(255, 255, 255, 0.7)'}`,
-                borderRadius: '16px',
+                ...glassmorphismStyle(theme),
                 transition: 'box-shadow 0.3s ease-in-out',
                 '&:hover': {
                   boxShadow: theme.palette.mode === 'dark'

@@ -17,15 +17,18 @@ const GradientBackground = () => {
     let t = 0;
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const { width, height } = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
     };
 
     const createGradient = () => {
       gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, theme.palette.primary.main);
-      gradient.addColorStop(0.5, theme.palette.background.default);
-      gradient.addColorStop(1, theme.palette.secondary.main);
+      gradient.addColorStop(0, theme.palette.primary.main + '33');
+      gradient.addColorStop(0.5, theme.palette.background.default + '33');
+      gradient.addColorStop(1, theme.palette.secondary.main + '33');
     };
 
     const animate = () => {
