@@ -1,16 +1,21 @@
 import { useEffect } from 'react';
 
-const ScrollAnimation = () => {
+interface ScrollAnimationOptions {
+  threshold?: number;
+  className?: string;
+}
+
+const ScrollAnimation = ({ threshold = 0.8, className = 'scroll-visible' }: ScrollAnimationOptions = {}) => {
   useEffect(() => {
     const handleScroll = () => {
       const elements = document.querySelectorAll('[data-scroll]');
 
       elements.forEach(element => {
         const rect = element.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight * 0.8;
+        const isVisible = rect.top < window.innerHeight * threshold;
 
         if (isVisible) {
-          element.classList.add('scroll-visible');
+          element.classList.add(className);
         }
       });
     };
@@ -19,7 +24,7 @@ const ScrollAnimation = () => {
     handleScroll(); // Initial check
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [threshold, className]);
 
   return null;
 };

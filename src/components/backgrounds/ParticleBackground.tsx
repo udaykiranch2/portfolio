@@ -12,19 +12,51 @@ const ParticleBackground = () => {
     const loadParticles = async (engine: Engine) => {
       await loadSlim(engine);
       setParticlesOptions({
-        background: { color: { value: "transparent" } },
+        background: { 
+          color: { 
+            value: "transparent" 
+          } 
+        },
         fpsLimit: 60,
         particles: {
-          color: { value: theme.palette.primary.main },
-          links: { color: theme.palette.primary.main, distance: 150, enable: true, opacity: 0.2, width: 1 },
-          move: { enable: true, random: false, speed: 1, straight: false },
-          number: { density: { enable: true, width: 800, height: 800 }, value: 80 },
-          opacity: { value: 0.3 },
-          size: { value: { min: 1, max: 3 } },
+          color: { 
+            value: theme.palette.primary.main 
+          },
+          links: { 
+            color: theme.palette.primary.main, 
+            distance: 150, 
+            enable: true, 
+            opacity: 0.2, 
+            width: 1 
+          },
+          move: { 
+            enable: true, 
+            random: false, 
+            speed: 1, 
+            straight: false 
+          },
+          number: { 
+            density: { 
+              enable: true, 
+              width: 800, 
+              height: 800 
+            }, 
+            value: 80 
+          },
+          opacity: { 
+            value: 0.3 
+          },
+          size: { 
+            value: { 
+              min: 1, 
+              max: 3 
+            } 
+          },
         },
       });
     };
-    loadParticles({} as Engine); // ✅ Temporary fix for missing `engine`
+    
+    loadParticles({} as Engine);
   }, [theme.palette.primary.main]);
 
   return particlesOptions ? (

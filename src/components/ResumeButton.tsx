@@ -1,12 +1,17 @@
-import { Button } from "@mui/material";
+import { Button, ButtonProps } from "@mui/material";
 import { Download } from "@mui/icons-material";
 
-interface ResumeButtonProps {
+interface ResumeButtonProps extends Omit<ButtonProps, 'variant'> {
     pdfUrl: string;
-    className?: string;
+    label?: string;
 }
 
-const ResumeButton = ({ pdfUrl, className }: ResumeButtonProps) => {
+const ResumeButton = ({ 
+    pdfUrl, 
+    className,
+    label = "Download Resume",
+    ...buttonProps 
+}: ResumeButtonProps) => {
     const handleClick = () => {
         // Open PDF in new tab
         window.open(pdfUrl, '_blank');
@@ -31,9 +36,11 @@ const ResumeButton = ({ pdfUrl, className }: ResumeButtonProps) => {
                     transform: 'translateY(-2px)',
                 },
                 transition: 'all 0.2s ease-in-out',
+                ...buttonProps.sx
             }}
+            {...buttonProps}
         >
-            Download Resume
+            {label}
         </Button>
     );
 };
