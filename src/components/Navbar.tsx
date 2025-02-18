@@ -5,36 +5,36 @@ import { useTheme as useCustomTheme } from "../context/ThemeContext";
 import { portfolioConfig } from "../config/portfolio.config";
 import { alpha } from "@mui/material/styles";
 
-const NavButton = ({ item, isActive, onClick }: { item: string, isActive: boolean, onClick: () => void }) => {
+const NavButton = ({ item, onClick }: { item: string, isActive: boolean, onClick: () => void }) => {
   return (
     <Button
       onClick={onClick}
-      sx={(theme) => ({
-        mx: 1.5,
-        py: 1,
-        px: 1.5,
-        color: isActive ? 'primary.main' : 'text.primary',
-        fontSize: '0.9rem',
-        fontWeight: 500,
-        letterSpacing: '0.3px',
-        textTransform: 'none',
-        position: 'relative',
-        '&::after': {
-          content: '""',
-          position: 'absolute',
-          bottom: 0,
-          left: '50%',
-          width: isActive ? '100%' : '0%',
-          height: '2px',
-          backgroundColor: 'primary.main',
-          transition: 'all 0.3s ease-in-out',
-          transform: 'translateX(-50%)',
-        },
-        '&:hover::after': {
-          width: '100%',
-        },
-        transition: 'all 0.3s ease-in-out',
-      })}
+      // sx={(theme: any) => ({
+      //   mx: 1.5,
+      //   py: 1,
+      //   px: 1.5,
+      //   color: isActive ? 'primary.main' : 'text.primary',
+      //   fontSize: '0.9rem',
+      //   fontWeight: 500,
+      //   letterSpacing: '0.3px',
+      //   textTransform: 'none',
+      //   position: 'relative',
+      //   '&::after': {
+      //     content: '""',
+      //     position: 'absolute',
+      //     bottom: 0,
+      //     left: '50%',
+      //     width: isActive ? '100%' : '0%',
+      //     height: '2px',
+      //     backgroundColor: 'primary.main',
+      //     transition: 'all 0.3s ease-in-out',
+      //     transform: 'translateX(-50%)',
+      //   },
+      //   '&:hover::after': {
+      //     width: '100%',
+      //   },
+      //   transition: 'all 0.3s ease-in-out',
+      // })}
     >
       {item}
     </Button>
@@ -88,11 +88,11 @@ const Navbar = () => {
     }
   };
 
-  const handleNavClick = (sectionId: string) => (event: React.MouseEvent) => {
-    event.preventDefault();
-    setActiveSection(sectionId);
-    scrollToSection(sectionId);
-  };
+  // const handleNavClick = (sectionId: string) => (event: React.MouseEvent) => {
+  //   event.preventDefault();
+  //   setActiveSection(sectionId);
+  //   scrollToSection(sectionId);
+  // };
 
   return (
     <AppBar 

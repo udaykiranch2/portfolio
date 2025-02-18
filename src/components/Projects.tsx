@@ -27,7 +27,7 @@ const getProjectIcon = (title: string, theme: any) => {
 };
 
 const ProjectCard = ({ project, index, theme }: any) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  // const [isExpanded, setIsExpanded] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
