@@ -13,11 +13,11 @@ const SocialLink = ({ Icon, url }: { Icon: React.ElementType, url: string }) => 
       size="small"
       sx={{
         color: theme.palette.mode === 'dark' ? '#94A3B8' : '#475569',
-        transition: 'all 0.2s ease-in-out',
-        padding: '8px',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        padding: { xs: '6px', sm: '8px' },
         '&:hover': {
           color: theme.palette.primary.main,
-          transform: 'translateY(-2px)',
+          transform: 'translateY(-3px) scale(1.1)',
           background: 'none'
         },
         '&::after': {
@@ -38,7 +38,13 @@ const SocialLink = ({ Icon, url }: { Icon: React.ElementType, url: string }) => 
         }
       }}
     >
-      <Icon sx={{ fontSize: 18 }} />
+      <Icon sx={{ 
+        fontSize: { xs: 16, sm: 18 },
+        transition: 'transform 0.3s ease',
+        '&:hover': {
+          transform: 'rotate(10deg)'
+        }
+      }} />
     </IconButton>
   );
 };
@@ -52,20 +58,36 @@ const Footer = () => {
       <Container 
         maxWidth="lg" 
         sx={{ 
-          py: 3,
-          mt: 8,
+          py: { xs: 2, sm: 3 },
+          mt: { xs: 6, sm: 8 },
           display: 'flex',
           flexDirection: 'column',
-          gap: 2
+          gap: { xs: 1.5, sm: 2 },
+          position: 'relative',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '80%',
+            height: '1px',
+            background: theme.palette.mode === 'dark'
+              ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)'
+              : 'linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent)',
+          }
         }}
       >
         <FadeInSection>
           {/* Social Links */}
           <Box 
-            className="flex justify-center gap-6 mb-4"
             sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: { xs: 3, sm: 6 },
+              mb: { xs: 2, sm: 4 },
               '& a': {
-                transition: 'all 0.2s ease-in-out',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
               }
             }}
           >
@@ -81,11 +103,15 @@ const Footer = () => {
             align="center"
             sx={{ 
               color: theme.palette.mode === 'dark' ? '#94A3B8' : '#475569',
-              fontSize: '0.75rem',
+              fontSize: { xs: '0.7rem', sm: '0.75rem' },
               fontWeight: 400,
               letterSpacing: '0.02em',
               opacity: 0.8,
-              mb: 1
+              mb: { xs: 0.5, sm: 1 },
+              transition: 'color 0.3s ease',
+              '&:hover': {
+                color: theme.palette.primary.main
+              }
             }}
           >
             {footer.copyright}
@@ -98,12 +124,17 @@ const Footer = () => {
             align="center"
             sx={{ 
               color: theme.palette.mode === 'dark' ? '#64748B' : '#64748B',
-              fontSize: '0.7rem',
+              fontSize: { xs: '0.65rem', sm: '0.7rem' },
               fontWeight: 400,
               letterSpacing: '0.02em',
-              opacity: 0.6
+              opacity: 0.6,
+              transition: 'opacity 0.3s ease',
+              '&:hover': {
+                opacity: 1
+              }
             }}
           >
+            Built with React, Material-UI, and ❤️
           </Typography>
         </FadeInSection>
       </Container>

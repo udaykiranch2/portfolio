@@ -1,4 +1,4 @@
-import { Container, Typography, Button, Box, Grid2 } from "@mui/material";
+import { Container, Typography, Button, Box, Grid2, useTheme, useMediaQuery, IconButton } from "@mui/material";
 import { portfolioConfig } from '../config/portfolio.config';
 import Profile from './Profile';
 import { alpha } from '@mui/material/styles';
@@ -7,6 +7,9 @@ import GradientBackground from './GradientBackground';
 
 const Hero = () => {
   const { hero, personal } = portfolioConfig;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <Container
@@ -17,277 +20,395 @@ const Hero = () => {
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
-        scrollMarginTop: '80px',
-        py: { xs: 12, md: 16 },
+        scrollMarginTop: { xs: '64px', md: '80px' },
+        py: { xs: 8, md: 16 },
       }}
     >
       <GradientBackground />
 
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          overflow: 'hidden',
+          zIndex: 0,
+          opacity: 0.5,
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            width: '40vw',
+            height: '40vw',
+            top: '-10%',
+            right: '-10%',
+            background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.15)} 0%, transparent 70%)`,
+            filter: 'blur(50px)',
+            animation: 'pulse 8s ease-in-out infinite',
+          },
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            width: '35vw',
+            height: '35vw',
+            bottom: '-10%',
+            left: '-10%',
+            background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.15)} 0%, transparent 70%)`,
+            filter: 'blur(50px)',
+            animation: 'pulse 8s ease-in-out infinite alternate',
+          },
+          '@keyframes pulse': {
+            '0%, 100%': {
+              transform: 'scale(1) translate(0, 0)',
+            },
+            '50%': {
+              transform: 'scale(1.1) translate(2%, 2%)',
+            },
+          },
+        }}
+      />
+
       <FadeInSection>
-        <Grid2 container spacing={4} alignItems="center">
-          <Grid2 size={{ xs: 12, md: 6 }}>
+        <Grid2 
+          container 
+          spacing={{ xs: 4, md: 8 }} 
+          alignItems="center" 
+          sx={{
+            position: 'relative',
+            zIndex: 1,
+          }}
+        >
+          <Grid2 
+            size={{ xs: 12, md: 7 }} 
+            order={{ xs: 2, md: 1 }}
+            sx={{
+              textAlign: { xs: 'center', md: 'left' },
+            }}
+          >
             <Box sx={{ position: 'relative' }}>
-
-              <Typography
-                variant="h5"
-                sx={(theme: any) => ({
-                  color: 'primary.main',
-                  fontWeight: 500,
-                  textTransform: 'uppercase',
-                  letterSpacing: theme.spacing(0.1),
-                  position: 'relative',
-                  display: 'inline-block',
-                  animation: 'slideIn 1s ease-out',
-                  '@keyframes slideIn': {
-                    from: { opacity: 0, transform: 'translateX(-20px)' },
-                    to: { opacity: 1, transform: 'translateX(0)' }
-                  },
-                  '&::after': {
-                    content: '""',
-                    position: 'absolute',
-                    bottom: theme.spacing(-0.5),
-                    left: 0,
-                    width: '2em',
-                    height: '2px',
-                    bgcolor: 'primary.main',
-                    animation: 'widthGrow 0.5s ease-out 0.5s forwards',
-                    '@keyframes widthGrow': {
-                      from: { width: 0 },
-                      to: { width: '2em' }
-                    }
-                  },
-                  mb: 1
-                })}
-              >
-                {hero.greeting}
-              </Typography>
-              <Typography
-                variant="h1"
-                sx={(theme: any) => ({
-                  fontWeight: 800,
-                  fontSize: {
-                    xs: theme.typography.h3.fontSize,
-                    md: theme.typography.h2.fontSize
-                  },
-                  lineHeight: 1.2,
-                  animation: 'fadeIn 1s ease-out 0.3s both',
-                  background: theme.palette.mode === 'dark'
-                    ? 'linear-gradient(135deg, #fff 0%, #60A5FA 50%, #818CF8 100%)'
-                    : 'linear-gradient(135deg, #1E293B 0%, #3B82F6 50%, #6366F1 100%)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  color: 'transparent',
-                  textShadow: theme.palette.mode === 'dark'
-                    ? '0 0 40px rgba(96, 165, 250, 0.15)'
-                    : '0 0 40px rgba(59, 130, 246, 0.15)',
-                  letterSpacing: '-0.02em',
-                  '@keyframes fadeIn': {
-                    from: { opacity: 0, transform: 'translateY(20px)' },
-                    to: { opacity: 1, transform: 'translateY(0)' }
-                  },
-                  position: 'relative',
-                  '&::after': {
-                    content: '""',
-                    position: 'absolute',
-                    bottom: '-10px',
-                    left: 0,
-                    width: '80px',
-                    height: '4px',
-                    background: theme.palette.mode === 'dark'
-                      ? 'linear-gradient(90deg, #60A5FA, #818CF8)'
-                      : 'linear-gradient(90deg, #3B82F6, #6366F1)',
-                    borderRadius: '4px',
-                    animation: 'widthPulse 2s ease-in-out infinite',
-                  },
-                  '@keyframes widthPulse': {
-                    '0%, 100%': { width: '80px', opacity: 1 },
-                    '50%': { width: '100px', opacity: 0.8 }
-                  },
-                  mb: 2,
-                })}
-              >
-                {personal.name}
-              </Typography>
-              <Typography
-                variant="h2"
-                sx={(theme: any) => ({
-                  color: 'text.secondary',
-                  fontSize: {
-                    xs: theme.typography.h4.fontSize,
-                    md: theme.typography.h3.fontSize
-                  },
-                  fontWeight: 550,
-                  animation: 'fadeIn 1s ease-out 0.6s both',
-                  mb: 2
-                })}
-              >
-                {personal.title}
-              </Typography>
-
-              <Typography
-                variant="body1"
-                sx={(theme: any) => ({
-                  color: 'text.secondary',
-                  maxWidth: theme.spacing(45),
-                  fontSize: {
-                    xs: theme.typography.body1.fontSize,
-                    md: theme.typography.h6.fontSize
-                  },
-                  lineHeight: 1.7,
-                  animation: 'fadeIn 1s ease-out 0.9s both',
-                  mb: 4
-                })}
-              >
-                {hero.tagline}
-              </Typography>
-
-              <Box sx={{
+              <Box sx={{ 
+                position: 'relative',
                 display: 'flex',
-                gap: 3,
-                mt: { xs: 4, md: 5 },
-                animation: 'fadeIn 1s ease-out 1.2s both'
+                flexDirection: 'column',
+                alignItems: { xs: 'center', md: 'flex-start' },
               }}>
-                <Button
-                  variant="contained"
-                  size="large"
-                  href="#contact"
-                  sx={(theme) => ({
-                    px: 4,
-                    py: 1.5,
-                    borderRadius: '100px',
-                    textTransform: 'none',
-                    fontSize: '1rem',
+                <Typography
+                  variant="h5"
+                  sx={{
+                    color: 'primary.main',
                     fontWeight: 500,
-                    letterSpacing: '0.3px',
-                    background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
-                    boxShadow: `0 10px 20px -10px ${alpha(theme.palette.primary.main, 0.5)}`,
-                    transition: 'all 0.3s ease-in-out',
+                    fontSize: { xs: '1rem', sm: '1.25rem' },
+                    mb: { xs: 0.5, md: 0.75 },
                     position: 'relative',
-                    overflow: 'hidden',
+                    display: 'inline-block',
+                    transform: 'translateY(0)',
+                    animation: 'slideDown 1s ease-out',
+                    '@keyframes slideDown': {
+                      '0%': {
+                        opacity: 0,
+                        transform: 'translateY(-20px)',
+                      },
+                      '100%': {
+                        opacity: 1,
+                        transform: 'translateY(0)',
+                      },
+                    },
+                    '&::after': {
+                      content: '""',
+                      position: 'absolute',
+                      bottom: '-4px',
+                      left: { xs: '50%', md: '0' },
+                      transform: { xs: 'translateX(-50%)', md: 'none' },
+                      width: '40px',
+                      height: '2px',
+                      background: `linear-gradient(90deg, 
+                        ${theme.palette.primary.main},
+                        ${theme.palette.secondary.main})`,
+                      animation: 'expandWidth 0.6s ease-out forwards',
+                      '@keyframes expandWidth': {
+                        '0%': {
+                          width: '0px',
+                        },
+                        '100%': {
+                          width: '40px',
+                        },
+                      },
+                    },
+                  }}
+                >
+                  {hero.greeting}
+                </Typography>
+
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' },
+                    fontWeight: 800,
+                    letterSpacing: { xs: '-1px', md: '-1.5px' },
+                    lineHeight: 1.2,
+                    mt: { xs: 0.5, md: 1 },
+                    mb: { xs: 2, md: 3 },
+                    background: `linear-gradient(135deg, 
+                      ${theme.palette.primary.main} 0%,
+                      ${theme.palette.secondary.main} 50%,
+                      ${theme.palette.primary.main} 100%)`,
+                    backgroundSize: '200% auto',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    animation: 'shine 5s linear infinite',
+                    '@keyframes shine': {
+                      '0%': {
+                        backgroundPosition: '0% center',
+                      },
+                      '100%': {
+                        backgroundPosition: '200% center',
+                      }
+                    },
+                    position: 'relative',
+                    display: 'inline-block',
+                    filter: 'drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2))',
                     '&::before': {
                       content: '""',
                       position: 'absolute',
-                      top: 0,
-                      left: 0,
+                      top: '105%',
                       width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1))',
-                      transition: 'transform 0.3s ease-in-out',
-                      transform: 'translateX(-100%)',
+                      left: 0,
+                      height: '10px',
+                      background: `linear-gradient(90deg,
+                        transparent 0%,
+                        ${alpha(theme.palette.primary.main, 0.3)} 50%,
+                        transparent 100%)`,
+                      filter: 'blur(4px)',
+                      animation: 'glow 2s ease-in-out infinite',
                     },
-                    '&:hover': {
-                      transform: 'translateY(-3px)',
-                      boxShadow: `0 20px 30px -15px ${alpha(theme.palette.primary.main, 0.7)}`,
-                      '&::before': {
-                        transform: 'translateX(0)',
+                    '@keyframes glow': {
+                      '0%, 100%': {
+                        opacity: 0.5,
+                        transform: 'scaleX(0.8)',
+                      },
+                      '50%': {
+                        opacity: 1,
+                        transform: 'scaleX(1.2)',
                       }
                     },
-                    '&:active': {
-                      transform: 'translateY(-1px)',
-                      boxShadow: `0 5px 15px -5px ${alpha(theme.palette.primary.main, 0.5)}`,
+                    '&::after': {
+                      content: '""',
+                      position: 'absolute',
+                      bottom: '-3px',
+                      left: 0,
+                      width: '100%',
+                      height: '3px',
+                      background: `linear-gradient(90deg, 
+                        transparent,
+                        ${theme.palette.primary.main},
+                        ${theme.palette.secondary.main},
+                        ${theme.palette.primary.main},
+                        transparent)`,
+                      backgroundSize: '200% auto',
+                      animation: 'shine 3s linear infinite',
                     }
-                  })}
+                  }}
                 >
-                  {hero.cta.primary}
-                </Button>
+                  {personal.name}
+                </Typography>
 
-                <Button
-                  variant="outlined"
-                  size="large"
-                  href="#projects"
-                  sx={(theme) => ({
-                    px: 4,
-                    py: 1.5,
-                    borderRadius: '100px',
-                    textTransform: 'none',
-                    fontSize: '1rem',
+                <Typography
+                  variant="h2"
+                  sx={{
+                    fontSize: { xs: '1.25rem', sm: '1.5rem', md: '1.75rem' },
                     fontWeight: 500,
-                    letterSpacing: '0.3px',
-                    borderWidth: '1.5px',
-                    borderColor: theme.palette.mode === 'dark'
-                      ? alpha(theme.palette.primary.main, 0.5)
-                      : theme.palette.primary.main,
-                    color: theme.palette.primary.main,
-                    background: 'transparent',
-                    backdropFilter: 'blur(10px)',
-                    transition: 'all 0.3s ease-in-out',
-                    '&:hover': {
-                      transform: 'translateY(-3px)',
-                      borderColor: theme.palette.primary.main,
-                      background: theme.palette.mode === 'dark'
-                        ? alpha(theme.palette.primary.main, 0.1)
-                        : alpha(theme.palette.primary.main, 0.05),
-                      boxShadow: `0 10px 20px -10px ${alpha(theme.palette.primary.main, 0.3)}`,
+                    color: theme.palette.mode === 'dark'
+                      ? alpha(theme.palette.common.white, 0.7)
+                      : alpha(theme.palette.common.black, 0.7),
+                    mb: { xs: 3, md: 4 },
+                    lineHeight: 1.5,
+                    maxWidth: '600px',
+                    mx: { xs: 'auto', md: 0 },
+                    position: 'relative',
+                    '&::after': {
+                      content: '""',
+                      position: 'absolute',
+                      bottom: '-10px',
+                      left: { xs: '50%', md: '0' },
+                      transform: { xs: 'translateX(-50%)', md: 'none' },
+                      width: '60px',
+                      height: '3px',
+                      background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                      borderRadius: '2px',
                     },
-                    '&:active': {
-                      transform: 'translateY(-1px)',
-                    }
-                  })}
+                  }}
                 >
-                  {hero.cta.secondary}
-                </Button>
-              </Box>
+                  {personal.title}
+                </Typography>
 
-              <Box sx={(theme: any) => ({
-                display: 'flex',
-                gap: 3,
-                mt: 4,
-                animation: 'fadeIn 1s ease-out 1.5s both',
-                '& > *': {
-                  fontSize: theme.typography.h4.fontSize,
-                  color: 'text.secondary',
-                  cursor: 'pointer',
-                  transition: theme.transitions.create(['color', 'transform'], {
-                    duration: theme.transitions.duration.shorter
-                  }),
-                  '&:hover': {
-                    color: 'primary.main',
-                    transform: 'translateY(-2px)'
-                  }
-                }
-              })}>
-                {hero.socialLinks.map((social, index) => {
-                  const Icon = social.icon;
-                  return (
-                    <Icon
-                      key={index}
-                      sx={{
-                        color: 'text.secondary',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                        '&:hover': {
-                          color: 'primary.main',
-                          transform: 'translateY(-2px)',
-                        }
-                      }}
-                      onClick={() => window.open(social.url, '_blank')}
-                    />
-                  );
-                })}
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: { xs: '1rem', sm: '1.1rem' },
+                    color: theme.palette.text.secondary,
+                    mb: { xs: 4, md: 5 },
+                    lineHeight: 1.8,
+                    maxWidth: '600px',
+                    mx: { xs: 'auto', md: 0 },
+                  }}
+                >
+                  {hero.tagline}
+                </Typography>
+
+                <Box
+                  sx={{
+                    display: 'flex',
+                    gap: { xs: 2, sm: 3 },
+                    justifyContent: { xs: 'center', md: 'flex-start' },
+                    flexWrap: { xs: 'nowrap', sm: 'wrap' },
+                    width: '100%',
+                    '& > button': {
+                      flex: { xs: '1 1 auto', sm: '0 0 auto' },
+                      minWidth: { xs: 'auto', sm: '140px' },
+                    }
+                  }}
+                >
+                  <Button
+                    variant="contained"
+                    size="large"
+                    href="#contact"
+                    sx={(theme) => ({
+                      px: { xs: 1.5, md: 3 },
+                      py: { xs: 1, md: 1.25 },
+                      borderRadius: '100px',
+                      textTransform: 'none',
+                      fontSize: { xs: '0.75rem', sm: '0.85rem', md: '0.9rem' },
+                      fontWeight: 500,
+                      letterSpacing: '0.3px',
+                      whiteSpace: 'nowrap',
+                      minWidth: 'auto',
+                      '& span': {
+                        whiteSpace: 'nowrap',
+                        display: 'block',
+                      },
+                      background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: 'inherit',
+                        borderRadius: 'inherit',
+                        transition: 'opacity 0.3s ease-in-out',
+                        opacity: 0,
+                        filter: 'brightness(1.2)',
+                      },
+                      '&:hover': {
+                        transform: 'translateY(-3px)',
+                        boxShadow: `0 10px 20px -10px ${alpha(theme.palette.primary.main, 0.5)}`,
+                        '&::before': {
+                          opacity: 1,
+                        },
+                      },
+                      '&:active': {
+                        transform: 'translateY(-1px)',
+                        boxShadow: `0 5px 15px -5px ${alpha(theme.palette.primary.main, 0.5)}`,
+                      },
+                    })}
+                  >
+                    <span style={{ position: 'relative', zIndex: 1 }}>{hero.cta.primary}</span>
+                  </Button>
+
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    href="#projects"
+                    sx={(theme) => ({
+                      px: { xs: 1.5, md: 3 },
+                      py: { xs: 1, md: 1.25 },
+                      borderRadius: '100px',
+                      textTransform: 'none',
+                      fontSize: { xs: '0.75rem', sm: '0.85rem', md: '0.9rem' },
+                      fontWeight: 500,
+                      letterSpacing: '0.3px',
+                      whiteSpace: 'nowrap',
+                      minWidth: 'auto',
+                      '& span': {
+                        whiteSpace: 'nowrap',
+                        display: 'block',
+                      },
+                      borderWidth: '1.5px',
+                      borderColor: theme.palette.mode === 'dark'
+                        ? alpha(theme.palette.primary.main, 0.5)
+                        : theme.palette.primary.main,
+                      color: theme.palette.primary.main,
+                      background: 'transparent',
+                      backdropFilter: 'blur(10px)',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      '&:hover': {
+                        transform: 'translateY(-3px)',
+                        borderColor: theme.palette.primary.main,
+                        background: theme.palette.mode === 'dark'
+                          ? alpha(theme.palette.primary.main, 0.1)
+                          : alpha(theme.palette.primary.main, 0.05),
+                        boxShadow: `0 10px 20px -10px ${alpha(theme.palette.primary.main, 0.3)}`,
+                      },
+                      '&:active': {
+                        transform: 'translateY(-1px)',
+                      }
+                    })}
+                  >
+                    {hero.cta.secondary}
+                  </Button>
+                </Box>
+
+                <Box
+                  sx={{
+                    display: 'flex',
+                    gap: { xs: 2, md: 3 },
+                    mt: { xs: 4, md: 5 },
+                    justifyContent: { xs: 'center', md: 'flex-start' },
+                  }}
+                >
+                  {hero.socialLinks.map((social, index) => {
+                    const Icon = social.icon;
+                    return (
+                      <IconButton
+                        key={index}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          color: 'text.secondary',
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                          '&:hover': {
+                            color: 'primary.main',
+                            transform: 'translateY(-3px)',
+                          },
+                        }}
+                      >
+                        <Icon />
+                      </IconButton>
+                    );
+                  })}
+                </Box>
               </Box>
             </Box>
           </Grid2>
 
-          <Grid2 size={{ xs: 12, md: 6 }}>
-            <Box
-              sx={{
-                position: 'relative',
-                '&::before': {
-                  content: '""',
-                  position: 'absolute',
-                  top: '10%',
-                  left: '10%',
-                  width: '80%',
-                  height: '80%',
-                  background: (theme: any) => `linear-gradient(45deg, ${theme.palette.primary.main}22, ${theme.palette.secondary.main}22)`,
-                  borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
-                  animation: 'morphing 15s ease-in-out infinite',
-                }
-              }}
-            >
-              <Profile />
-            </Box>
+          <Grid2 
+            size={{ xs: 12, md: 5 }} 
+            order={{ xs: 1, md: 2 }}
+            sx={{
+              display: 'flex',
+              justifyContent: { xs: 'center', md: 'flex-start' },
+              alignItems: 'center',
+              transform: { xs: 'scale(0.9)', md: 'none' },
+              ml: { md: -4 },
+            }}
+          >
+            <Profile />
           </Grid2>
         </Grid2>
       </FadeInSection>

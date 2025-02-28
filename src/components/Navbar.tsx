@@ -1,51 +1,103 @@
-import { AppBar, Toolbar, Button, Container, IconButton, useTheme, Typography, Avatar, Box } from "@mui/material";
+import { AppBar, Toolbar, Button, Container, IconButton, useTheme, Typography, Avatar, Box, Drawer, List, ListItem, ListItemText, useMediaQuery } from "@mui/material";
 import { useState, useEffect } from "react";
-import { LightMode, DarkMode, Download } from "@mui/icons-material";
+import { LightMode, DarkMode, Download, Menu as MenuIcon } from "@mui/icons-material";
 import { useTheme as useCustomTheme } from "../context/ThemeContext";
 import { portfolioConfig } from "../config/portfolio.config";
 import { alpha } from "@mui/material/styles";
 
-const NavButton = ({ item, onClick }: { item: string, isActive: boolean, onClick: () => void }) => {
+const NavButton = ({ item, isActive, onClick }: { item: string, isActive: boolean, onClick: () => void }) => {
+  const theme = useTheme();
+  
   return (
     <Button
       onClick={onClick}
-      // sx={(theme: any) => ({
-      //   mx: 1.5,
-      //   py: 1,
-      //   px: 1.5,
-      //   color: isActive ? 'primary.main' : 'text.primary',
-      //   fontSize: '0.9rem',
-      //   fontWeight: 500,
-      //   letterSpacing: '0.3px',
-      //   textTransform: 'none',
-      //   position: 'relative',
-      //   '&::after': {
-      //     content: '""',
-      //     position: 'absolute',
-      //     bottom: 0,
-      //     left: '50%',
-      //     width: isActive ? '100%' : '0%',
-      //     height: '2px',
-      //     backgroundColor: 'primary.main',
-      //     transition: 'all 0.3s ease-in-out',
-      //     transform: 'translateX(-50%)',
-      //   },
-      //   '&:hover::after': {
-      //     width: '100%',
-      //   },
-      //   transition: 'all 0.3s ease-in-out',
-      // })}
+      sx={{
+        mx: { xs: 0, sm: 0.25 },
+        py: 0.75,
+        px: { xs: 0.5, sm: 1 },
+        color: isActive ? 'primary.main' : 'text.primary',
+        fontSize: { xs: '0.75rem', sm: '0.85rem' },
+        fontWeight: 500,
+        letterSpacing: '0.3px',
+        textTransform: 'none',
+        position: 'relative',
+        overflow: 'hidden',
+        minWidth: 'auto',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          bottom: 0,
+          left: '50%',
+          width: isActive ? '100%' : '0%',
+          height: '2px',
+          background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: isActive ? 'translateX(-50%)' : 'translateX(-50%) scaleX(0)',
+          transformOrigin: 'center',
+          boxShadow: `0 2px 4px ${alpha(theme.palette.primary.main, 0.3)}`,
+        },
+        '&:hover': {
+          backgroundColor: 'transparent',
+          color: theme.palette.primary.main,
+          transform: 'translateY(-1px)',
+          '&::before': {
+            width: '100%',
+            transform: 'translateX(-50%) scaleX(1)',
+          },
+        },
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+      }}
     >
       {item}
     </Button>
   );
 };
 
+const MobileNavItem = ({ item, isActive, onClick }: { item: string, isActive: boolean, onClick: () => void }) => {
+  const theme = useTheme();
+  
+  return (
+    <ListItem 
+      component="button"
+      onClick={onClick}
+      sx={{
+        py: 1.5,
+        px: 3,
+        border: 'none',
+        width: '100%',
+        display: 'block',
+        textAlign: 'left',
+        borderLeft: isActive ? `3px solid ${theme.palette.primary.main}` : '3px solid transparent',
+        backgroundColor: isActive ? alpha(theme.palette.primary.main, 0.08) : 'transparent',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        '&:hover': {
+          backgroundColor: alpha(theme.palette.primary.main, 0.08),
+          borderLeft: `3px solid ${theme.palette.primary.main}`,
+        }
+      }}
+    >
+      <ListItemText 
+        primary={item} 
+        sx={{
+          '& .MuiListItemText-primary': {
+            color: isActive ? theme.palette.primary.main : theme.palette.text.primary,
+            fontSize: '0.95rem',
+            fontWeight: isActive ? 600 : 500,
+            transition: 'all 0.3s ease',
+          }
+        }}
+      />
+    </ListItem>
+  );
+};
+
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { darkMode, toggleDarkMode } = useCustomTheme();
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const navItems = portfolioConfig.navigation.items;
 
@@ -53,7 +105,6 @@ const Navbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Find which section is currently in view
       const sections = navItems.map(item => ({
         id: item.toLowerCase(),
         element: document.getElementById(item.toLowerCase())
@@ -77,7 +128,7 @@ const Navbar = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 80; // Adjust this value based on your navbar height
+      const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -85,57 +136,59 @@ const Navbar = () => {
         top: offsetPosition,
         behavior: 'smooth'
       });
+      
+      if (isMobile) {
+        setMobileMenuOpen(false);
+      }
     }
   };
-
-  // const handleNavClick = (sectionId: string) => (event: React.MouseEvent) => {
-  //   event.preventDefault();
-  //   setActiveSection(sectionId);
-  //   scrollToSection(sectionId);
-  // };
 
   return (
     <AppBar 
       position="fixed" 
       elevation={0}
       sx={{ 
-        background: 'transparent',
+        background: scrolled ? alpha(theme.palette.background.default, 0.8) : 'transparent',
         backdropFilter: scrolled ? 'blur(8px)' : 'none',
         borderBottom: scrolled 
           ? `1px solid ${theme.palette.mode === 'dark' 
               ? 'rgba(255, 255, 255, 0.05)' 
               : 'rgba(0, 0, 0, 0.05)'}`
           : 'none',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       }}
     >
       <Container maxWidth="lg">
         <Toolbar 
           sx={{ 
             py: scrolled ? 1 : 1.5,
-            transition: 'all 0.3s ease-in-out'
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            justifyContent: 'space-between',
           }}
-          className="justify-between"
         >
           {/* Logo/Name Section */}
           <Box 
-            className="flex items-center gap-3" 
             sx={{ 
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2,
               opacity: scrolled ? 1 : 0.95,
-              transition: 'opacity 0.3s ease'
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
           >
             <Avatar
               src={portfolioConfig.personal.avatar}
               sx={{
-                width: 34,
-                height: 34,
+                width: { xs: 32, sm: 34 },
+                height: { xs: 32, sm: 34 },
                 border: `1.5px solid ${alpha(theme.palette.primary.main, 0.3)}`,
                 background: theme.palette.mode === 'dark'
                   ? 'linear-gradient(45deg, #82B1FF 30%, #2979FF 90%)'
                   : 'linear-gradient(45deg, #1976D2 30%, #2196F3 90%)',
-                transition: 'transform 0.3s ease',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 '&:hover': {
-                  transform: 'scale(1.05)'
+                  transform: 'scale(1.05) rotate(5deg)',
+                  border: `1.5px solid ${theme.palette.primary.main}`,
                 }
               }}
             >
@@ -144,13 +197,41 @@ const Navbar = () => {
             <Typography
               variant="h6"
               sx={{
-                fontSize: '1.1rem',
+                fontSize: { xs: '1rem', sm: '1.1rem' },
                 fontWeight: 600,
-                color: theme.palette.text.primary,
-                letterSpacing: '0.2px',
-                transition: 'all 0.3s ease',
+                letterSpacing: '0.5px',
+                background: theme.palette.mode === 'dark'
+                  ? `linear-gradient(135deg, ${theme.palette.common.white} 30%, ${alpha(theme.palette.primary.main, 0.9)} 90%)`
+                  : `linear-gradient(135deg, ${theme.palette.text.primary} 30%, ${theme.palette.primary.main} 90%)`,
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                textShadow: theme.palette.mode === 'dark'
+                  ? '0 2px 4px rgba(0,0,0,0.2)'
+                  : '0 2px 4px rgba(0,0,0,0.1)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                position: 'relative',
                 '&:hover': {
-                  color: theme.palette.primary.main
+                  transform: 'translateX(3px) scale(1.02)',
+                  background: `linear-gradient(135deg, ${theme.palette.primary.main} 20%, ${theme.palette.secondary.main} 80%)`,
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  letterSpacing: '0.8px',
+                },
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  bottom: -2,
+                  left: 0,
+                  width: '0%',
+                  height: '2px',
+                  background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                  transition: 'width 0.3s ease',
+                  opacity: 0,
+                },
+                '&:hover::after': {
+                  width: '100%',
+                  opacity: 1,
                 }
               }}
             >
@@ -158,18 +239,22 @@ const Navbar = () => {
             </Typography>
           </Box>
 
-          {/* Navigation Items */}
-          <Box className="flex items-center gap-2">
-            <Box className="hidden md:flex">
-              {navItems.map((item) => (
-                <NavButton
-                  key={item}
-                  item={item}
-                  isActive={activeSection === item.toLowerCase()}
-                  onClick={() => scrollToSection(item.toLowerCase())}
-                />
-              ))}
-            </Box>
+          {/* Desktop Navigation */}
+          <Box 
+            sx={{ 
+              display: { xs: 'none', md: 'flex' },
+              alignItems: 'center',
+              gap: { sm: 0.5, md: 1 },
+            }}
+          >
+            {navItems.map((item) => (
+              <NavButton
+                key={item}
+                item={item}
+                isActive={activeSection === item.toLowerCase()}
+                onClick={() => scrollToSection(item.toLowerCase())}
+              />
+            ))}
 
             {/* Resume Button */}
             <Button
@@ -178,23 +263,24 @@ const Navbar = () => {
               target="_blank"
               startIcon={<Download />}
               sx={{
-                ml: 2,
-                px: 2,
+                ml: { sm: 0.5, md: 1 },
+                px: { xs: 1, sm: 1.5 },
                 py: 0.7,
                 borderRadius: '8px',
                 textTransform: 'none',
-                fontSize: '0.9rem',
+                fontSize: { xs: '0.75rem', sm: '0.85rem' },
                 fontWeight: 500,
+                minWidth: 'auto',
                 borderColor: theme.palette.mode === 'dark' 
                   ? 'rgba(255, 255, 255, 0.12)' 
                   : 'rgba(0, 0, 0, 0.12)',
                 color: 'text.primary',
                 '&:hover': {
                   borderColor: 'primary.main',
-                  backgroundColor: 'transparent',
-                  transform: 'translateY(-2px)'
+                  backgroundColor: alpha(theme.palette.primary.main, 0.08),
+                  transform: 'translateY(-2px)',
                 },
-                transition: 'all 0.2s ease-in-out'
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
               }}
             >
               Resume
@@ -204,22 +290,108 @@ const Navbar = () => {
             <IconButton
               onClick={toggleDarkMode}
               sx={{
-                ml: 2,
+                ml: { sm: 1, md: 2 },
                 color: theme.palette.text.primary,
                 opacity: 0.7,
-                transition: 'all 0.2s ease-in-out',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 '&:hover': {
                   opacity: 1,
-                  backgroundColor: 'transparent',
-                  transform: 'rotate(10deg)'
+                  backgroundColor: alpha(theme.palette.primary.main, 0.08),
+                  transform: 'rotate(180deg)',
                 }
               }}
             >
               {darkMode ? <LightMode sx={{ fontSize: 20 }} /> : <DarkMode sx={{ fontSize: 20 }} />}
             </IconButton>
           </Box>
+
+          {/* Mobile Menu Button */}
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', gap: 2 }}>
+            <IconButton
+              onClick={toggleDarkMode}
+              sx={{
+                color: theme.palette.text.primary,
+                opacity: 0.7,
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                '&:hover': {
+                  opacity: 1,
+                  backgroundColor: alpha(theme.palette.primary.main, 0.08),
+                  transform: 'rotate(180deg)',
+                }
+              }}
+            >
+              {darkMode ? <LightMode sx={{ fontSize: 20 }} /> : <DarkMode sx={{ fontSize: 20 }} />}
+            </IconButton>
+            <IconButton
+              onClick={() => setMobileMenuOpen(true)}
+              sx={{
+                color: theme.palette.text.primary,
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                '&:hover': {
+                  backgroundColor: alpha(theme.palette.primary.main, 0.08),
+                }
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
         </Toolbar>
       </Container>
+
+      {/* Mobile Menu Drawer */}
+      <Drawer
+        anchor="right"
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        PaperProps={{
+          sx: {
+            width: '75%',
+            maxWidth: '300px',
+            background: theme.palette.mode === 'dark' 
+              ? alpha(theme.palette.background.paper, 0.95)
+              : alpha(theme.palette.background.paper, 0.95),
+            backdropFilter: 'blur(8px)',
+          }
+        }}
+      >
+        <Box sx={{ py: 2 }}>
+          <List>
+            {navItems.map((item) => (
+              <MobileNavItem
+                key={item}
+                item={item}
+                isActive={activeSection === item.toLowerCase()}
+                onClick={() => scrollToSection(item.toLowerCase())}
+              />
+            ))}
+            <ListItem 
+              component="a"
+              href={portfolioConfig.resume.link}
+              target="_blank"
+              sx={{
+                py: 1.5,
+                px: 3,
+                mt: 1,
+                borderTop: `1px solid ${theme.palette.mode === 'dark' 
+                  ? 'rgba(255, 255, 255, 0.05)' 
+                  : 'rgba(0, 0, 0, 0.05)'}`,
+              }}
+            >
+              <ListItemText 
+                primary="Resume" 
+                sx={{
+                  '& .MuiListItemText-primary': {
+                    color: theme.palette.text.primary,
+                    fontSize: '0.95rem',
+                    fontWeight: 500,
+                  }
+                }}
+              />
+              <Download sx={{ ml: 1, fontSize: 20, color: theme.palette.text.secondary }} />
+            </ListItem>
+          </List>
+        </Box>
+      </Drawer>
     </AppBar>
   );
 };
