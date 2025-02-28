@@ -1,4 +1,4 @@
-import { Container, Typography, Button, Box, Grid2, useTheme, useMediaQuery, IconButton } from "@mui/material";
+import { Container, Typography, Button, Box, Grid2, useTheme, IconButton } from "@mui/material";
 import { portfolioConfig } from '../config/portfolio.config';
 import Profile from './Profile';
 import { alpha } from '@mui/material/styles';
@@ -8,8 +8,8 @@ import GradientBackground from './GradientBackground';
 const Hero = () => {
   const { hero, personal } = portfolioConfig;
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+  // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  // const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <Container
