@@ -18,7 +18,7 @@ const getIconColor = (theme: Theme, color: string) => {
 const SkillCard = ({ category, index, theme }: { category: any, index: number, theme: Theme }) => {
   const Icon = category.icon;
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  // const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+
   const delay = isMobile ? index * 0.1 : index * 0.2;
   const direction = index % 2 === 0 ? 'left' : 'right';
 

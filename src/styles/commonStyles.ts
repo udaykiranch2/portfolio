@@ -2,13 +2,13 @@ import { Theme } from '@mui/material';
 
 export const sectionContainerStyle = {
   position: 'relative',
-  minHeight: '100vh',
-  py: { xs: 12, md: 16 },
+  minHeight: '90vh',
+  py: { xs: 8, md: 10 },
   scrollMarginTop: '80px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  mb: 8,
+  mb: { xs: 4, md: 6 },
 };
 
 export const glassmorphismStyle = (theme: Theme) => ({
