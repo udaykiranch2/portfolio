@@ -33,6 +33,7 @@ const ProjectCard = ({ project, index, theme }: any) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
+
   const handleModalOpen = (e: React.MouseEvent) => {
     e.stopPropagation();
     setOpenModal(true);

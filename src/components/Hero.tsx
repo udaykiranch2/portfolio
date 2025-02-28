@@ -9,6 +9,7 @@ const Hero = () => {
   const { hero, personal } = portfolioConfig;
   const theme = useTheme();
 
+
   return (
     <Container
       id="home"
