@@ -1,4 +1,4 @@
-import { Container, Typography, Button, Box, Grid2, useTheme, useMediaQuery, IconButton } from "@mui/material";
+import { Container, Typography, Button, Box, Grid2, useTheme, IconButton } from "@mui/material";
 import { portfolioConfig } from '../config/portfolio.config';
 import Profile from './Profile';
 import { alpha } from '@mui/material/styles';
@@ -8,20 +8,19 @@ import GradientBackground from './GradientBackground';
 const Hero = () => {
   const { hero, personal } = portfolioConfig;
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <Container
       id="home"
       sx={{
-        minHeight: '100vh',
+        minHeight: '90vh',
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
         scrollMarginTop: { xs: '64px', md: '80px' },
-        py: { xs: 8, md: 16 },
+        py: { xs: 4, md: 6 },
+        mb: { xs: -4, md: -6 }
       }}
     >
       <GradientBackground />
@@ -70,24 +69,24 @@ const Hero = () => {
       />
 
       <FadeInSection>
-        <Grid2 
-          container 
-          spacing={{ xs: 4, md: 8 }} 
-          alignItems="center" 
+        <Grid2
+          container
+          spacing={{ xs: 4, md: 8 }}
+          alignItems="center"
           sx={{
             position: 'relative',
             zIndex: 1,
           }}
         >
-          <Grid2 
-            size={{ xs: 12, md: 7 }} 
+          <Grid2
+            size={{ xs: 12, md: 7 }}
             order={{ xs: 2, md: 1 }}
             sx={{
               textAlign: { xs: 'center', md: 'left' },
             }}
           >
             <Box sx={{ position: 'relative' }}>
-              <Box sx={{ 
+              <Box sx={{
                 position: 'relative',
                 display: 'flex',
                 flexDirection: 'column',
@@ -397,8 +396,8 @@ const Hero = () => {
             </Box>
           </Grid2>
 
-          <Grid2 
-            size={{ xs: 12, md: 5 }} 
+          <Grid2
+            size={{ xs: 12, md: 5 }}
             order={{ xs: 1, md: 2 }}
             sx={{
               display: 'flex',

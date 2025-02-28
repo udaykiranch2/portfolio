@@ -32,7 +32,6 @@ const getProjectIcon = (title: string, theme: any) => {
 const ProjectCard = ({ project, index, theme }: any) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleModalOpen = (e: React.MouseEvent) => {
     e.stopPropagation();

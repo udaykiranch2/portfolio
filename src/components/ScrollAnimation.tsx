@@ -6,8 +6,8 @@ interface ScrollAnimationOptions {
   rootMargin?: string;
 }
 
-const ScrollAnimation = ({ 
-  threshold = 0.2, 
+const ScrollAnimation = ({
+  threshold = 0.2,
   className = 'scroll-visible',
   rootMargin = '0px'
 }: ScrollAnimationOptions = {}) => {
@@ -15,10 +15,12 @@ const ScrollAnimation = ({
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          // Add class when element enters viewport
           if (entry.isIntersecting) {
             entry.target.classList.add(className);
-            // Once the animation is triggered, we can stop observing this element
-            observer.unobserve(entry.target);
+          } else {
+            // Remove class when element leaves viewport
+            entry.target.classList.remove(className);
           }
         });
       },
