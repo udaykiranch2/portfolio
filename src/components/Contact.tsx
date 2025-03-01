@@ -217,7 +217,7 @@ const Contact = () => {
               <form ref={form} onSubmit={handleSubmit}>
                 <Grid2 container spacing={2}>
                   {contact.form.fields.map((field) => (
-                    <Grid2 key={field.name} size={field.type === 'textarea' ? 12 : { lg: 12, xs: 12, md: 6 }}>
+                    <Grid2 key={field.name} size={field.type === 'textarea' ? 12 : { lg: 12, xs: 12, md: 12 }}>
                       <TextField
                         name={field.name}
                         fullWidth

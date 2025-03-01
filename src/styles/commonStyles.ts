@@ -17,7 +17,7 @@ export const glassmorphismStyle = (theme: Theme) => ({
     : `linear-gradient(145deg, ${theme.palette.background.paper}, ${theme.palette.background.default})`,
   backdropFilter: 'blur(10px)',
   border: `1px solid ${theme.palette.divider}`,
-  borderRadius: theme.shape.borderRadius * 2,
+  borderRadius: theme.shape.borderRadius*1.15,
 });
 
 export const buttonStyles = (theme: Theme) => ({

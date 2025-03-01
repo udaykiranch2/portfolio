@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Button, Container, IconButton, useTheme, Typography, Avatar, Box, Drawer, List, ListItem, ListItemText, useMediaQuery } from "@mui/material";
+import { AppBar, Toolbar, Button, Container, IconButton, useTheme, Typography, Avatar, Box, Drawer, List, ListItem, ListItemText, useMediaQuery, ListItemButton } from "@mui/material";
 import { useState, useEffect } from "react";
 import { LightMode, DarkMode, Download, Menu as MenuIcon } from "@mui/icons-material";
 import { useTheme as useCustomTheme } from "../context/ThemeContext";
@@ -7,22 +7,22 @@ import { alpha } from "@mui/material/styles";
 
 const NavButton = ({ item, isActive, onClick }: { item: string, isActive: boolean, onClick: () => void }) => {
   const theme = useTheme();
-  
+
   return (
     <Button
       onClick={onClick}
+      data-color-pop
       sx={{
-        mx: { xs: 0, sm: 0.25 },
-        py: 0.75,
-        px: { xs: 0.5, sm: 1 },
-        color: isActive ? 'primary.main' : 'text.primary',
-        fontSize: { xs: '0.75rem', sm: '0.85rem' },
-        fontWeight: 500,
-        letterSpacing: '0.3px',
-        textTransform: 'none',
         position: 'relative',
+        px: { xs: 1.5, md: 2 },
+        py: { xs: 0.75, md: 1 },
+        color: isActive ? 'primary.main' : 'text.primary',
+        fontSize: { xs: '0.9rem', md: '1rem' },
+        fontWeight: 500,
+        textTransform: 'none',
+        borderRadius: 2,
         overflow: 'hidden',
-        minWidth: 'auto',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         '&::before': {
           content: '""',
           position: 'absolute',
@@ -30,22 +30,24 @@ const NavButton = ({ item, isActive, onClick }: { item: string, isActive: boolea
           left: '50%',
           width: isActive ? '100%' : '0%',
           height: '2px',
-          background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          bgcolor: 'primary.main',
           transform: isActive ? 'translateX(-50%)' : 'translateX(-50%) scaleX(0)',
-          transformOrigin: 'center',
-          boxShadow: `0 2px 4px ${alpha(theme.palette.primary.main, 0.3)}`,
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         },
         '&:hover': {
-          backgroundColor: 'transparent',
-          color: theme.palette.primary.main,
-          transform: 'translateY(-1px)',
+          color: 'primary.main',
+          transform: 'translateY(-2px)',
+          bgcolor: theme.palette.mode === 'dark'
+            ? 'rgba(255, 255, 255, 0.05)'
+            : 'rgba(0, 0, 0, 0.03)',
           '&::before': {
-            width: '100%',
+            width: '80%',
             transform: 'translateX(-50%) scaleX(1)',
           },
         },
-        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        '&:active': {
+          transform: 'translateY(0)',
+        },
       }}
     >
       {item}
@@ -55,39 +57,56 @@ const NavButton = ({ item, isActive, onClick }: { item: string, isActive: boolea
 
 const MobileNavItem = ({ item, isActive, onClick }: { item: string, isActive: boolean, onClick: () => void }) => {
   const theme = useTheme();
-  
+
   return (
-    <ListItem 
-      component="button"
+    <ListItemButton
       onClick={onClick}
+      data-color-pop
       sx={{
         py: 1.5,
         px: 3,
-        border: 'none',
-        width: '100%',
-        display: 'block',
-        textAlign: 'left',
-        borderLeft: isActive ? `3px solid ${theme.palette.primary.main}` : '3px solid transparent',
-        backgroundColor: isActive ? alpha(theme.palette.primary.main, 0.08) : 'transparent',
+        borderRadius: 2,
+        mb: 1,
+        color: isActive ? 'primary.main' : 'text.primary',
+        bgcolor: isActive
+          ? theme.palette.mode === 'dark'
+            ? 'rgba(255, 255, 255, 0.05)'
+            : 'rgba(0, 0, 0, 0.03)'
+          : 'transparent',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         '&:hover': {
-          backgroundColor: alpha(theme.palette.primary.main, 0.08),
-          borderLeft: `3px solid ${theme.palette.primary.main}`,
-        }
+          bgcolor: theme.palette.mode === 'dark'
+            ? 'rgba(255, 255, 255, 0.08)'
+            : 'rgba(0, 0, 0, 0.05)',
+          transform: 'translateX(8px)',
+        },
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          left: 0,
+          top: '50%',
+          height: isActive ? '50%' : '0%',
+          width: '3px',
+          bgcolor: 'primary.main',
+          transform: 'translateY(-50%)',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          borderRadius: '0 4px 4px 0',
+        },
+        '&:hover::before': {
+          height: '50%',
+        },
       }}
     >
-      <ListItemText 
-        primary={item} 
+      <ListItemText
+        primary={item}
         sx={{
           '& .MuiListItemText-primary': {
-            color: isActive ? theme.palette.primary.main : theme.palette.text.primary,
-            fontSize: '0.95rem',
-            fontWeight: isActive ? 600 : 500,
-            transition: 'all 0.3s ease',
-          }
+            fontSize: '1rem',
+            fontWeight: isActive ? 500 : 400,
+          },
         }}
       />
-    </ListItem>
+    </ListItemButton>
   );
 };
 
@@ -136,7 +155,7 @@ const Navbar = () => {
         top: offsetPosition,
         behavior: 'smooth'
       });
-      
+
       if (isMobile) {
         setMobileMenuOpen(false);
       }
@@ -144,31 +163,31 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar 
-      position="fixed" 
+    <AppBar
+      position="fixed"
       elevation={0}
-      sx={{ 
+      sx={{
         background: scrolled ? alpha(theme.palette.background.default, 0.8) : 'transparent',
         backdropFilter: scrolled ? 'blur(8px)' : 'none',
-        borderBottom: scrolled 
-          ? `1px solid ${theme.palette.mode === 'dark' 
-              ? 'rgba(255, 255, 255, 0.05)' 
-              : 'rgba(0, 0, 0, 0.05)'}`
+        borderBottom: scrolled
+          ? `1px solid ${theme.palette.mode === 'dark'
+            ? 'rgba(255, 255, 255, 0.05)'
+            : 'rgba(0, 0, 0, 0.05)'}`
           : 'none',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       }}
     >
       <Container maxWidth="lg">
-        <Toolbar 
-          sx={{ 
+        <Toolbar
+          sx={{
             py: scrolled ? 1 : 1.5,
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             justifyContent: 'space-between',
           }}
         >
           {/* Logo/Name Section */}
-          <Box 
-            sx={{ 
+          <Box
+            sx={{
               display: 'flex',
               alignItems: 'center',
               gap: 2,
@@ -240,8 +259,8 @@ const Navbar = () => {
           </Box>
 
           {/* Desktop Navigation */}
-          <Box 
-            sx={{ 
+          <Box
+            sx={{
               display: { xs: 'none', md: 'flex' },
               alignItems: 'center',
               gap: { sm: 0.5, md: 1 },
@@ -271,8 +290,8 @@ const Navbar = () => {
                 fontSize: { xs: '0.75rem', sm: '0.85rem' },
                 fontWeight: 500,
                 minWidth: 'auto',
-                borderColor: theme.palette.mode === 'dark' 
-                  ? 'rgba(255, 255, 255, 0.12)' 
+                borderColor: theme.palette.mode === 'dark'
+                  ? 'rgba(255, 255, 255, 0.12)'
                   : 'rgba(0, 0, 0, 0.12)',
                 color: 'text.primary',
                 '&:hover': {
@@ -347,7 +366,7 @@ const Navbar = () => {
           sx: {
             width: '75%',
             maxWidth: '300px',
-            background: theme.palette.mode === 'dark' 
+            background: theme.palette.mode === 'dark'
               ? alpha(theme.palette.background.paper, 0.95)
               : alpha(theme.palette.background.paper, 0.95),
             backdropFilter: 'blur(8px)',
@@ -364,7 +383,7 @@ const Navbar = () => {
                 onClick={() => scrollToSection(item.toLowerCase())}
               />
             ))}
-            <ListItem 
+            <ListItem
               component="a"
               href={portfolioConfig.resume.link}
               target="_blank"
@@ -372,13 +391,13 @@ const Navbar = () => {
                 py: 1.5,
                 px: 3,
                 mt: 1,
-                borderTop: `1px solid ${theme.palette.mode === 'dark' 
-                  ? 'rgba(255, 255, 255, 0.05)' 
+                borderTop: `1px solid ${theme.palette.mode === 'dark'
+                  ? 'rgba(255, 255, 255, 0.05)'
                   : 'rgba(0, 0, 0, 0.05)'}`,
               }}
             >
-              <ListItemText 
-                primary="Resume" 
+              <ListItemText
+                primary="Resume"
                 sx={{
                   '& .MuiListItemText-primary': {
                     color: theme.palette.text.primary,

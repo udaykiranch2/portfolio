@@ -6,7 +6,7 @@ import { GlobalStyles } from '@mui/material';
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [darkMode, setDarkMode] = useState(true);
-  
+
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
   return (

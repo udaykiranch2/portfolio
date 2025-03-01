@@ -21,7 +21,7 @@ export interface CustomThemeOptions extends ThemeOptions {
       primary: string;
       secondary: string;
     };
-    
+
 
   };
 

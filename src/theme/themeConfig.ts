@@ -76,6 +76,7 @@ const components: Components = {
       root: () => ({
         textTransform: 'none',
         fontWeight: 500,
+        borderRadius: 8,
       }),
     },
   },
@@ -83,7 +84,38 @@ const components: Components = {
     styleOverrides: {
       root: () => ({
         backgroundImage: 'none',
+        borderRadius: 8,
       }),
+    },
+  },
+  MuiCard: {
+    styleOverrides: {
+      root: {
+        borderRadius: 8,
+      },
+    },
+  },
+  MuiTextField: {
+    styleOverrides: {
+      root: {
+        '& .MuiOutlinedInput-root': {
+          borderRadius: 8,
+        },
+      },
+    },
+  },
+  MuiDialog: {
+    styleOverrides: {
+      paper: {
+        borderRadius: 8,
+      },
+    },
+  },
+  MuiChip: {
+    styleOverrides: {
+      root: {
+        borderRadius: 8,
+      },
     },
   },
 };
@@ -92,21 +124,21 @@ export const lightTheme: CustomThemeOptions = {
   palette: {
     mode: 'light',
     primary: {
-      main: colors.blue[500], // Updated primary color
+      main: colors.blue[500],
       light: colors.blue[300],
       dark: colors.blue[700],
     },
     secondary: {
-      main: colors.purple[500], // Updated secondary color
+      main: colors.purple[500],
       light: colors.purple[300],
       dark: colors.purple[700],
     },
     background: {
-      default: '#ffffff', // Clean background matching design
+      default: '#ffffff',
       paper: 'rgba(255, 255, 255, 0.9)',
     },
     text: {
-      primary: colors.slate[900], // Dark slate for contrast
+      primary: colors.slate[900],
       secondary: colors.slate[600],
     },
   },
@@ -137,21 +169,21 @@ export const darkTheme: CustomThemeOptions = {
   palette: {
     mode: 'dark',
     primary: {
-      main: colors.blue[400], // Slightly lighter blue for contrast
+      main: colors.blue[400],
       light: colors.blue[300],
       dark: colors.blue[600],
     },
     secondary: {
-      main: colors.purple[400], // Adjusted secondary for better balance
+      main: colors.purple[400],
       light: colors.purple[300],
       dark: colors.purple[600],
     },
     background: {
-      default: colors.slate[900], // Deep blue-gray for dark mode
-      paper: 'rgba(30, 41, 59, 0.9)',
+      default: colors.slate[900],
+      paper: ''
     },
     text: {
-      primary: colors.slate[100], // Light text for readability
+      primary: colors.slate[100],
       secondary: colors.slate[400],
     },
   },

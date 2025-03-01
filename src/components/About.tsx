@@ -14,9 +14,9 @@ const About = () => {
       id="about"
       sx={sectionContainerStyle}
     >
-      <AnimatedBackground 
-        variant="dots" 
-        opacity={0.05} 
+      <AnimatedBackground
+        variant="dots"
+        opacity={0.05}
         color={theme.palette.primary.main}
       />
       <FadeInSection>

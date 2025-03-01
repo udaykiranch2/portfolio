@@ -70,12 +70,12 @@ const ProjectCard = ({ project, index, theme }: any) => {
             }}
           >
             {/* Front of card */}
-            <Card 
-              sx={{ 
-                ...glassmorphismStyle(theme), 
-                position: 'absolute', 
-                width: '100%', 
-                height: '100%', 
+            <Card
+              sx={{
+                ...glassmorphismStyle(theme),
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
                 backfaceVisibility: 'hidden',
                 overflow: 'hidden',
                 '&::before': {
@@ -106,7 +106,7 @@ const ProjectCard = ({ project, index, theme }: any) => {
                 height="100%"
                 image={project.image}
                 alt={project.title}
-                sx={{ 
+                sx={{
                   objectFit: 'cover',
                   height: '100%',
                   width: '100%',
@@ -132,13 +132,13 @@ const ProjectCard = ({ project, index, theme }: any) => {
                   transition: 'all 0.3s ease-in-out',
                 }}
               >
-                <Typography variant="h6" sx={{ 
+                <Typography variant="h6" sx={{
                   fontWeight: 600,
                   textShadow: '0 2px 4px rgba(0,0,0,0.3)',
                 }}>
                   {project.title}
                 </Typography>
-                <Typography variant="body2" sx={{ 
+                <Typography variant="body2" sx={{
                   mt: 1,
                   opacity: 0.9,
                   textShadow: '0 1px 2px rgba(0,0,0,0.3)',
@@ -177,7 +177,7 @@ const ProjectCard = ({ project, index, theme }: any) => {
                   borderRadius: '8px',
                 }}>
                   {getProjectIcon(project.title, theme)}
-                  <Typography variant="h6" sx={{ 
+                  <Typography variant="h6" sx={{
                     color: theme.palette.mode === 'dark' ? '#F1F5F9' : '#0F172A',
                     fontWeight: 600,
                     fontSize: { xs: '1rem', sm: '1.25rem' }
@@ -204,7 +204,7 @@ const ProjectCard = ({ project, index, theme }: any) => {
                   {project.description}
                 </Typography>
 
-                <Box sx={{ 
+                <Box sx={{
                   flex: 1,
                   display: 'flex',
                   flexWrap: 'wrap',
@@ -244,7 +244,7 @@ const ProjectCard = ({ project, index, theme }: any) => {
                   ))}
                 </Box>
 
-                <Box sx={{ 
+                <Box sx={{
                   display: 'flex',
                   gap: 2,
                   mt: 'auto',
@@ -308,7 +308,7 @@ const ProjectCard = ({ project, index, theme }: any) => {
                 mr: 2,
               }}>
                 {getProjectIcon(project.title, theme)}
-                <Typography variant="h5" sx={{ 
+                <Typography variant="h5" sx={{
                   color: theme.palette.mode === 'dark' ? '#F1F5F9' : '#0F172A',
                   fontWeight: 600,
                   fontSize: { xs: '1.25rem', sm: '1.5rem' }
@@ -316,7 +316,7 @@ const ProjectCard = ({ project, index, theme }: any) => {
                   {project.title}
                 </Typography>
               </Box>
-              <IconButton 
+              <IconButton
                 onClick={handleModalClose}
                 sx={{
                   color: theme.palette.text.secondary,
@@ -376,16 +376,16 @@ const Projects = () => {
 
   return (
     <Container id="projects" sx={sectionContainerStyle}>
-      <AnimatedBackground 
-        variant="waves" 
-        opacity={0.07} 
+      <AnimatedBackground
+        variant="waves"
+        opacity={0.07}
         color={theme.palette.primary.main}
       />
       <FadeInSection>
         <SectionTitle title={projects.title} />
       </FadeInSection>
-      <Grid2 
-        container 
+      <Grid2
+        container
         spacing={{ xs: 2, sm: 3, md: 4 }}
         sx={{
           position: 'relative',

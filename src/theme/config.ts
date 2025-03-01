@@ -60,5 +60,5 @@ export const darkTheme: CustomThemeOptions = {
     h3: { fontSize: "2rem", fontWeight: 600, color: "#F1F5F9" },
     body1: { color: "#94A3B8" },
   },
-  
+
 }; 

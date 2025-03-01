@@ -24,7 +24,7 @@ const SkillCard = ({ category, index, theme }: { category: any, index: number, t
 
   return (
     <FadeInSection delay={delay} direction={direction}>
-      <Paper 
+      <Paper
         sx={{
           p: { xs: 2, sm: 2.5, md: 3 },
           height: '100%',
@@ -90,7 +90,7 @@ const SkillCard = ({ category, index, theme }: { category: any, index: number, t
             }
           }}>
             <Icon
-              sx={{ 
+              sx={{
                 fontSize: { xs: '2rem', sm: '2.25rem', md: '2.5rem' },
                 color: getIconColor(theme, category.iconColor),
                 filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))',
@@ -110,8 +110,8 @@ const SkillCard = ({ category, index, theme }: { category: any, index: number, t
               }}
             />
           </Box>
-          <Typography 
-            variant="h6" 
+          <Typography
+            variant="h6"
             sx={{
               fontWeight: 700,
               color: theme.palette.text.primary,
@@ -154,7 +154,7 @@ const SkillCard = ({ category, index, theme }: { category: any, index: number, t
                   position: 'relative',
                   padding: '6px 12px',
                   borderRadius: '6px',
-                  backgroundColor: theme.palette.mode === 'dark' 
+                  backgroundColor: theme.palette.mode === 'dark'
                     ? 'rgba(255, 255, 255, 0.03)'
                     : 'rgba(0, 0, 0, 0.02)',
                   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -179,7 +179,7 @@ const SkillCard = ({ category, index, theme }: { category: any, index: number, t
               >
                 <Typography
                   variant="body2"
-                  sx={{ 
+                  sx={{
                     color: theme.palette.text.secondary,
                     fontSize: { xs: '0.85rem', sm: '0.9rem', md: '0.95rem' },
                     fontWeight: 500,
@@ -208,16 +208,16 @@ const Skills = () => {
 
   return (
     <Container id="skills" sx={sectionContainerStyle}>
-      <AnimatedBackground 
-        variant="dots" 
-        opacity={0.05} 
+      <AnimatedBackground
+        variant="dots"
+        opacity={0.05}
         color={theme.palette.secondary.main}
       />
       <FadeInSection>
         <SectionTitle title={skills.title} />
       </FadeInSection>
-      <Grid2 
-        container 
+      <Grid2
+        container
         spacing={{ xs: 2, sm: 3, md: 4 }}
         sx={{
           position: 'relative',
@@ -246,8 +246,8 @@ const Skills = () => {
         }}
       >
         {skills.categories.map((category, index) => (
-          <Grid2 
-            size={{ xs: 12, sm: 6, lg: 3 }} 
+          <Grid2
+            size={{ xs: 12, sm: 6, lg: 3 }}
             key={category.category}
             sx={{ position: 'relative', zIndex: 1 }}
           >
