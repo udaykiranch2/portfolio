@@ -1,41 +1,24 @@
-import { CssBaseline } from "@mui/material";
-import { ThemeProvider } from "./context/ThemeProvider";
-import ParticleBackground from "./components/backgrounds/ParticleBackground";
-import ModernGradient from "./components/backgrounds/ModernGradient";
-import NoiseOverlay from "./components/backgrounds/NoiseOverlay";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import ScrollAnimation from './components/ScrollAnimation';
-import './styles/animations.css';
-
-// Add smooth scroll behavior to html
-if (typeof window !== 'undefined') {
-  document.documentElement.style.scrollBehavior = 'smooth';
-}
+import { Navbar } from './components/Navbar';
+import { Home } from './pages/Home';
+import { About } from './pages/About';
+import { Skills } from './pages/Skills';
+import { Projects } from './pages/Projects';
+import { Contact } from './pages/Contact';
+import { bgStyles } from './styles/utilities';
+import { ThemeProvider } from './components/ThemeProvider';
 
 function App() {
   return (
     <ThemeProvider>
-      <CssBaseline />
-      <ModernGradient />
-      <ParticleBackground />
-      <NoiseOverlay />
-      <ScrollAnimation threshold={0.2} rootMargin="-50px" />
-      <div className="min-h-screen">
+      <div className={bgStyles.primary}>
         <Navbar />
-        <main>
-          <Hero />
+        <div className="min-h-screen">
+          <Home />
           <About />
           <Skills />
           <Projects />
           <Contact />
-        </main>
-        <Footer />
+        </div>
       </div>
     </ThemeProvider>
   );
