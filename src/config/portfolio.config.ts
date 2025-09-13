@@ -138,7 +138,7 @@ export const portfolioConfig = {
     title: "Resume",
     subtitle: "Download My Resume",
     button: "Download Resume",
-    link: "https://drive.google.com/file/d/12QZf-2YFoE93d8MWRSJ8fbyZbhMcItFN/view?usp=drive_link",
+    link: "https://drive.google.com/file/d/1PjtSSuurRyRCQ6qNuLOdFbyNs6aVh7qs/view?usp=sharing",
   }
 };
 
