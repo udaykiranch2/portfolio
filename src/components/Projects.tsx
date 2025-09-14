@@ -400,17 +400,6 @@ const Projects = () => {
             filter: 'blur(40px)',
             zIndex: 0,
           },
-          '&::after': {
-            content: '""',
-            position: 'absolute',
-            bottom: isMobile ? '-20px' : '-40px',
-            left: isMobile ? '-20px' : '-40px',
-            width: isMobile ? '150px' : '200px',
-            height: isMobile ? '150px' : '200px',
-            background: `radial-gradient(circle, ${theme.palette.secondary.main}15, transparent 70%)`,
-            filter: 'blur(40px)',
-            zIndex: 0,
-          }
         }}
       >
         {projects.items.map((project, index) => (

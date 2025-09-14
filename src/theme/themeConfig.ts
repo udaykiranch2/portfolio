@@ -118,6 +118,15 @@ const components: Components = {
       },
     },
   },
+  MuiGrid2: {
+    styleOverrides: {
+      root: {
+        '&::after': {
+          display: 'none !important',
+        },
+      },
+    },
+  },
 };
 
 export const lightTheme: CustomThemeOptions = {
@@ -162,7 +171,7 @@ export const lightTheme: CustomThemeOptions = {
         },
       },
     },
-  },
+  }
 };
 
 export const darkTheme: CustomThemeOptions = {
