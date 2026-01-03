@@ -1,4 +1,4 @@
-import { Container, Typography, Button, Box, Grid2, useTheme, IconButton } from "@mui/material";
+import { Box, Button, Container, Grid2, IconButton, Typography, useTheme } from "@mui/material";
 import { portfolioConfig } from '../config/portfolio.config';
 import Profile from './Profile';
 import { alpha } from '@mui/material/styles';
@@ -45,7 +45,7 @@ const Hero = () => {
                         right: '-10%',
                         background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.15)} 0%, transparent 70%)`,
                         filter: 'blur(50px)',
-                        animation: 'pulse 8s ease-in-out infinite',
+                        animation: 'pulse 8s ease-in-out infinite'
                     },
                     '&::after': {
                         content: '""',
@@ -56,16 +56,16 @@ const Hero = () => {
                         left: '-10%',
                         background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.15)} 0%, transparent 70%)`,
                         filter: 'blur(50px)',
-                        animation: 'pulse 8s ease-in-out infinite alternate',
+                        animation: 'pulse 8s ease-in-out infinite alternate'
                     },
                     '@keyframes pulse': {
                         '0%, 100%': {
-                            transform: 'scale(1) translate(0, 0)',
+                            transform: 'scale(1) translate(0, 0)'
                         },
                         '50%': {
-                            transform: 'scale(1.1) translate(2%, 2%)',
-                        },
-                    },
+                            transform: 'scale(1.1) translate(2%, 2%)'
+                        }
+                    }
                 }}
             />
 
@@ -76,14 +76,14 @@ const Hero = () => {
                     alignItems="center"
                     sx={{
                         position: 'relative',
-                        zIndex: 1,
+                        zIndex: 1
                     }}
                 >
                     <Grid2
                         size={{ xs: 12, md: 7 }}
                         order={{ xs: 2, md: 1 }}
                         sx={{
-                            textAlign: { xs: 'center', md: 'left' },
+                            textAlign: { xs: 'center', md: 'left' }
                         }}
                     >
                         <Box sx={{ position: 'relative' }}>
@@ -91,7 +91,7 @@ const Hero = () => {
                                 position: 'relative',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                alignItems: { xs: 'center', md: 'flex-start' },
+                                alignItems: { xs: 'center', md: 'flex-start' }
                             }}>
                                 <Typography
                                     variant="h5"
@@ -107,12 +107,12 @@ const Hero = () => {
                                         '@keyframes slideDown': {
                                             '0%': {
                                                 opacity: 0,
-                                                transform: 'translateY(-20px)',
+                                                transform: 'translateY(-20px)'
                                             },
                                             '100%': {
                                                 opacity: 1,
-                                                transform: 'translateY(0)',
-                                            },
+                                                transform: 'translateY(0)'
+                                            }
                                         },
                                         '&::after': {
                                             content: '""',
@@ -128,13 +128,13 @@ const Hero = () => {
                                             animation: 'expandWidth 0.6s ease-out forwards',
                                             '@keyframes expandWidth': {
                                                 '0%': {
-                                                    width: '0px',
+                                                    width: '0px'
                                                 },
                                                 '100%': {
-                                                    width: '40px',
-                                                },
-                                            },
-                                        },
+                                                    width: '40px'
+                                                }
+                                            }
+                                        }
                                     }}
                                 >
                                     {hero.greeting}
@@ -159,10 +159,10 @@ const Hero = () => {
                                         animation: 'shine 5s linear infinite',
                                         '@keyframes shine': {
                                             '0%': {
-                                                backgroundPosition: '0% center',
+                                                backgroundPosition: '0% center'
                                             },
                                             '100%': {
-                                                backgroundPosition: '200% center',
+                                                backgroundPosition: '200% center'
                                             }
                                         },
                                         position: 'relative',
@@ -180,16 +180,16 @@ const Hero = () => {
                         ${alpha(theme.palette.primary.main, 0.3)} 50%,
                         transparent 100%)`,
                                             filter: 'blur(4px)',
-                                            animation: 'glow 2s ease-in-out infinite',
+                                            animation: 'glow 2s ease-in-out infinite'
                                         },
                                         '@keyframes glow': {
                                             '0%, 100%': {
                                                 opacity: 0.5,
-                                                transform: 'scaleX(0.8)',
+                                                transform: 'scaleX(0.8)'
                                             },
                                             '50%': {
                                                 opacity: 1,
-                                                transform: 'scaleX(1.2)',
+                                                transform: 'scaleX(1.2)'
                                             }
                                         },
                                         '&::after': {
@@ -206,7 +206,7 @@ const Hero = () => {
                         ${theme.palette.primary.main},
                         transparent)`,
                                             backgroundSize: '200% auto',
-                                            animation: 'shine 3s linear infinite',
+                                            animation: 'shine 3s linear infinite'
                                         }
                                     }}
                                 >
@@ -235,8 +235,8 @@ const Hero = () => {
                                             width: '60px',
                                             height: '3px',
                                             background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                                            borderRadius: '2px',
-                                        },
+                                            borderRadius: '2px'
+                                        }
                                     }}
                                 >
                                     {personal.title}
@@ -250,7 +250,7 @@ const Hero = () => {
                                         mb: { xs: 4, md: 5 },
                                         lineHeight: 1.8,
                                         maxWidth: '600px',
-                                        mx: { xs: 'auto', md: 0 },
+                                        mx: { xs: 'auto', md: 0 }
                                     }}
                                 >
                                     {hero.tagline}
@@ -265,7 +265,7 @@ const Hero = () => {
                                         width: '100%',
                                         '& > button': {
                                             flex: { xs: '1 1 auto', sm: '0 0 auto' },
-                                            minWidth: { xs: 'auto', sm: '140px' },
+                                            minWidth: { xs: 'auto', sm: '140px' }
                                         }
                                     }}
                                 >
@@ -285,7 +285,7 @@ const Hero = () => {
                                             minWidth: 'auto',
                                             '& span': {
                                                 whiteSpace: 'nowrap',
-                                                display: 'block',
+                                                display: 'block'
                                             },
                                             background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                                             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -302,19 +302,19 @@ const Hero = () => {
                                                 borderRadius: 'inherit',
                                                 transition: 'opacity 0.3s ease-in-out',
                                                 opacity: 0,
-                                                filter: 'brightness(1.2)',
+                                                filter: 'brightness(1.2)'
                                             },
                                             '&:hover': {
                                                 transform: 'translateY(-3px)',
                                                 boxShadow: `0 10px 20px -10px ${alpha(theme.palette.primary.main, 0.5)}`,
                                                 '&::before': {
-                                                    opacity: 1,
-                                                },
+                                                    opacity: 1
+                                                }
                                             },
                                             '&:active': {
                                                 transform: 'translateY(-1px)',
-                                                boxShadow: `0 5px 15px -5px ${alpha(theme.palette.primary.main, 0.5)}`,
-                                            },
+                                                boxShadow: `0 5px 15px -5px ${alpha(theme.palette.primary.main, 0.5)}`
+                                            }
                                         })}
                                     >
                                         <span style={{ position: 'relative', zIndex: 1 }}>{hero.cta.primary}</span>
@@ -336,7 +336,7 @@ const Hero = () => {
                                             minWidth: 'auto',
                                             '& span': {
                                                 whiteSpace: 'nowrap',
-                                                display: 'block',
+                                                display: 'block'
                                             },
                                             borderWidth: '1.5px',
                                             borderColor: theme.palette.mode === 'dark'
@@ -352,10 +352,10 @@ const Hero = () => {
                                                 background: theme.palette.mode === 'dark'
                                                     ? alpha(theme.palette.primary.main, 0.1)
                                                     : alpha(theme.palette.primary.main, 0.05),
-                                                boxShadow: `0 10px 20px -10px ${alpha(theme.palette.primary.main, 0.3)}`,
+                                                boxShadow: `0 10px 20px -10px ${alpha(theme.palette.primary.main, 0.3)}`
                                             },
                                             '&:active': {
-                                                transform: 'translateY(-1px)',
+                                                transform: 'translateY(-1px)'
                                             }
                                         })}
                                     >
@@ -368,7 +368,7 @@ const Hero = () => {
                                         display: 'flex',
                                         gap: { xs: 2, md: 3 },
                                         mt: { xs: 4, md: 5 },
-                                        justifyContent: { xs: 'center', md: 'flex-start' },
+                                        justifyContent: { xs: 'center', md: 'flex-start' }
                                     }}
                                 >
                                     {hero.socialLinks.map((social, index) => {
@@ -384,8 +384,8 @@ const Hero = () => {
                                                     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                                     '&:hover': {
                                                         color: 'primary.main',
-                                                        transform: 'translateY(-3px)',
-                                                    },
+                                                        transform: 'translateY(-3px)'
+                                                    }
                                                 }}
                                             >
                                                 <Icon />
@@ -405,7 +405,7 @@ const Hero = () => {
                             justifyContent: { xs: 'center', md: 'flex-start' },
                             alignItems: 'center',
                             transform: { xs: 'scale(0.9)', md: 'none' },
-                            ml: { md: -4 },
+                            ml: { md: -4 }
                         }}
                     >
                         <Profile />
