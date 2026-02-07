@@ -4,38 +4,35 @@ interface SectionTitleProps {
   title: string;
 }
 
+/**
+ * Section Title Component
+ * Clean, minimalist design with subtle accent
+ */
 const SectionTitle = ({ title }: SectionTitleProps) => {
   return (
     <Typography
       variant="h4"
-      sx={(theme: any) => ({
+      sx={(theme) => ({
         textAlign: 'center',
         color: 'primary.main',
-        fontWeight: 500,
+        fontWeight: 600,
         textTransform: 'uppercase',
-        letterSpacing: theme.spacing(0.1),
+        letterSpacing: '1px',
+        fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' },
         position: 'relative',
-        animation: 'slideIn 1s ease-out',
-        '@keyframes slideIn': {
-          from: { opacity: 0, transform: 'translateX(-20px)' },
-          to: { opacity: 1, transform: 'translateX(0)' }
-        },
+        mb: { xs: 4, sm: 5, md: 6 },
+        pb: 3,
         '&::after': {
           content: '""',
           position: 'absolute',
-          bottom: theme.spacing(-1),
+          bottom: 0,
           left: '50%',
           transform: 'translateX(-50%)',
-          width: '2em',
-          height: '2px',
-          bgcolor: 'primary.main',
-          animation: 'widthGrow 0.5s ease-out 0.5s forwards',
-          '@keyframes widthGrow': {
-            from: { width: 0 },
-            to: { width: '4em' }
-          }
+          width: { xs: '50px', sm: '60px' },
+          height: '3px',
+          background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+          borderRadius: '2px',
         },
-        mb: 3
       })}
     >
       {title}
@@ -43,4 +40,4 @@ const SectionTitle = ({ title }: SectionTitleProps) => {
   );
 };
 
-export default SectionTitle; 
+export default SectionTitle;
