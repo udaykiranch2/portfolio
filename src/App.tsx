@@ -13,7 +13,7 @@ import Footer from "./components/Footer";
 import ScrollAnimation from './components/ScrollAnimation';
 import './styles/animations.css';
 
-// Add smooth scroll behavior to html
+// Smooth scroll behavior
 if (typeof window !== 'undefined') {
   document.documentElement.style.scrollBehavior = 'smooth';
 }
@@ -22,10 +22,15 @@ function App() {
   return (
     <ThemeProvider>
       <CssBaseline />
+      {/* Background layers - optimized and clean */}
       <ModernGradient />
       <ParticleBackground />
       <NoiseOverlay />
+
+      {/* Scroll animation system */}
       <ScrollAnimation threshold={0.2} rootMargin="-50px" />
+
+      {/* Main content */}
       <div className="min-h-screen">
         <Navbar />
         <main>

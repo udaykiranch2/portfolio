@@ -1,194 +1,408 @@
 /* Base styles for elements before animation */
 [data-scroll] {
-  opacity: 0;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: opacity, transform;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  -webkit-font-smoothing: antialiased;
+    opacity: 0;
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
 }
 
 /* Animation styles when element becomes visible */
 .scroll-visible {
-  opacity: 1 !important;
-  transform: translateX(0) !important;
+    opacity: 1 !important;
+    transform: translateX(0) translateY(0) !important;
 }
 
-/* Fade in from bottom */
+/* Fade in from bottom - subtle parallax */
 [data-scroll="up"] {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(30px);
 }
 
 /* Fade in from top */
 [data-scroll="down"] {
-  opacity: 0;
-  transform: translateY(-30px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(-30px);
 }
 
 /* Fade in from left */
 [data-scroll="left"] {
-  opacity: 0;
-  transform: translateX(-40px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateX(-30px);
 }
 
 /* Fade in from right */
 [data-scroll="right"] {
-  opacity: 0;
-  transform: translateX(40px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateX(30px);
 }
 
-/* Scale up animation */
+/* Scale up - subtle */
 [data-scroll="scale-up"] {
-  opacity: 0;
-  transform: scale(0.96);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: scale(0.97);
 }
 
 /* Stagger children animations */
-[data-scroll="stagger"]>* {
-  opacity: 0;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  backface-visibility: hidden;
-  transform: translateZ(0);
+[data-scroll="stagger"] > * {
+    opacity: 0;
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-[data-scroll="stagger"]>*:nth-child(odd) {
-  transform: translateX(-40px);
+[data-scroll="stagger"] > *:nth-child(odd) {
+    transform: translateX(-20px);
 }
 
-[data-scroll="stagger"]>*:nth-child(even) {
-  transform: translateX(40px);
+[data-scroll="stagger"] > *:nth-child(even) {
+    transform: translateX(20px);
 }
 
-[data-scroll="stagger"].scroll-visible>* {
-  opacity: 1;
-  transform: translateX(0);
+[data-scroll="stagger"].scroll-visible > * {
+    opacity: 1;
+    transform: translateX(0);
 }
 
-/* Consistent animation delays across all screen sizes */
-[data-scroll="stagger"].scroll-visible>*:nth-child(1) {
-  transition-delay: 0.1s;
+/* Staggered delays - subtle timing */
+[data-scroll="stagger"].scroll-visible > *:nth-child(1) {
+    transition-delay: 0.1s;
+}
+[data-scroll="stagger"].scroll-visible > *:nth-child(2) {
+    transition-delay: 0.2s;
+}
+[data-scroll="stagger"].scroll-visible > *:nth-child(3) {
+    transition-delay: 0.3s;
+}
+[data-scroll="stagger"].scroll-visible > *:nth-child(4) {
+    transition-delay: 0.4s;
+}
+[data-scroll="stagger"].scroll-visible > *:nth-child(5) {
+    transition-delay: 0.5s;
+}
+[data-scroll="stagger"].scroll-visible > *:nth-child(6) {
+    transition-delay: 0.6s;
 }
 
-[data-scroll="stagger"].scroll-visible>*:nth-child(2) {
-  transition-delay: 0.2s;
+[data-scroll="stagger"] > * {
+    transition-delay: 0s;
 }
 
-[data-scroll="stagger"].scroll-visible>*:nth-child(3) {
-  transition-delay: 0.3s;
+/* ============================================
+   SUBTLE KEYFRAME ANIMATIONS
+   ============================================ */
+
+/* Fade animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-[data-scroll="stagger"].scroll-visible>*:nth-child(4) {
-  transition-delay: 0.4s;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
-[data-scroll="stagger"].scroll-visible>*:nth-child(5) {
-  transition-delay: 0.5s;
+/* Subtle float - gentle movement */
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
 }
 
-/* Reset transition delays when element is not visible */
-[data-scroll="stagger"]>* {
-  transition-delay: 0s;
+/* Gentle pulse */
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.02);
+    }
 }
 
-/* Hover effects and color pop animations */
-[data-scroll].scroll-visible {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+/* Shimmer effect for gradients */
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
 }
 
-[data-scroll].scroll-visible:hover {
-  transform: translateY(-5px);
+/* Subtle glow */
+@keyframes subtleGlow {
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(var(--glow-color), 0.15);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(var(--glow-color), 0.25);
+    }
 }
 
-/* Color pop effect on hover */
-[data-color-pop] {
-  position: relative;
-  overflow: hidden;
+/* Morphing shape */
+@keyframes morph {
+    0%,
+    100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    50% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
 }
 
-[data-color-pop]::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: currentColor;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: -1;
-  border-radius: inherit;
+/* Expand width for underlines */
+@keyframes expandWidth {
+    from {
+        width: 0;
+    }
+    to {
+        width: var(--target-width, 40px);
+    }
 }
 
-[data-color-pop]:hover::before {
-  opacity: 0.1;
-  transform: scale(1);
+/* Progress fill */
+@keyframes fillProgress {
+    from {
+        width: 0;
+    }
+    to {
+        width: var(--progress, 100%);
+    }
 }
 
-/* Ensure animations don't play on load for users who prefer reduced motion */
+/* Ripple effect */
+@keyframes ripple {
+    from {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+    to {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+.animate-fadeIn {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+.animate-pulse {
+    animation: pulse 4s ease-in-out infinite;
+}
+.animate-morph {
+    animation: morph 12s ease-in-out infinite;
+}
+
+/* Animation delays */
+.delay-100 {
+    animation-delay: 0.1s;
+}
+.delay-200 {
+    animation-delay: 0.2s;
+}
+.delay-300 {
+    animation-delay: 0.3s;
+}
+.delay-400 {
+    animation-delay: 0.4s;
+}
+.delay-500 {
+    animation-delay: 0.5s;
+}
+.delay-600 {
+    animation-delay: 0.6s;
+}
+
+/* ============================================
+   GLASSMORPHISM UTILITIES
+   ============================================ */
+
+.glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.glass-dark {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover lift - subtle */
+.hover-lift {
+    transition:
+        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================
+   GRADIENT TEXT
+   ============================================ */
+
+.gradient-text {
+    background: linear-gradient(
+        135deg,
+        var(--gradient-1, #3b82f6) 0%,
+        var(--gradient-2, #8b5cf6) 50%,
+        var(--gradient-1, #3b82f6) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 6s linear infinite;
+}
+
+/* ============================================
+   INTERACTIVE HOVER EFFECTS
+   ============================================ */
+
+/* Magnetic button effect */
+.magnetic-btn {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.magnetic-btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition:
+        width 0.6s ease,
+        height 0.6s ease;
+}
+
+.magnetic-btn:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Card 3D effect base */
+.card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   SCROLL PROGRESS INDICATOR
+   ============================================ */
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        var(--progress-color, #3b82f6),
+        var(--progress-color-end, #8b5cf6)
+    );
+    transform-origin: left;
+    z-index: 9999;
+    transition: transform 0.1s linear;
+}
+
+/* ============================================
+   CURSOR EFFECTS (Optional)
+   ============================================ */
+
+.cursor-glow {
+    pointer-events: none;
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(
+        circle,
+        rgba(59, 130, 246, 0.08) 0%,
+        transparent 70%
+    );
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9998;
+    transition: opacity 0.3s ease;
+}
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   ============================================ */
 @media (prefers-reduced-motion: reduce) {
-  [data-scroll] {
-    transition: none !important;
-    transform: none !important;
-    opacity: 1 !important;
-  }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    [data-scroll] {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+
+    .animate-float,
+    .animate-pulse,
+    .animate-morph {
+        animation: none !important;
+    }
 }
 
-/* Add animation delays */
-[style*="animation-delay:"] {
-  opacity: 0;
-}
-
-.scroll-visible[style*="animation-delay:"] {
-  opacity: 1;
-}
-
-/* Cursor effects */
-.cursor-effect {
-  pointer-events: none;
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: var(--cursor-color, currentColor);
-  opacity: 0.3;
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
-  z-index: 9999;
-}
-
-.cursor-effect.active {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 0.6;
-}
-
-/* Ensure consistent animations for medium screens */
+/* ============================================
+   RESPONSIVE TWEAKS
+   ============================================ */
 @media (min-width: 768px) {
-  [data-scroll] {
-    transition-duration: 0.6s;
-  }
+    [data-scroll="up"],
+    [data-scroll="down"] {
+        transform: translateY(40px);
+    }
 
-  [data-scroll="up"],
-  [data-scroll="down"] {
-    transform: translateY(30px);
-  }
-
-  [data-scroll="left"],
-  [data-scroll="right"] {
-    transform: translateX(40px);
-  }
-
-  [data-scroll="stagger"]>* {
-    transition-duration: 0.6s;
-  }
-
-  [data-scroll="stagger"].scroll-visible>*:nth-child(n) {
-    transition-delay: calc(0.1s * var(--scroll-index, 1));
-  }
+    [data-scroll="left"],
+    [data-scroll="right"] {
+        transform: translateX(40px);
+    }
 }

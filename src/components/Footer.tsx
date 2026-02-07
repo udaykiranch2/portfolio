@@ -1,10 +1,14 @@
 import { Container, Typography, IconButton, Box, useTheme } from "@mui/material";
 import { portfolioConfig } from '../config/portfolio.config';
 import FadeInSection from './FadeInSection';
+import { alpha } from '@mui/material/styles';
 
+/**
+ * Social Link Component
+ */
 const SocialLink = ({ Icon, url }: { Icon: React.ElementType, url: string }) => {
   const theme = useTheme();
-  
+
   return (
     <IconButton
       href={url}
@@ -12,57 +16,39 @@ const SocialLink = ({ Icon, url }: { Icon: React.ElementType, url: string }) => 
       rel="noopener noreferrer"
       size="small"
       sx={{
-        color: theme.palette.mode === 'dark' ? '#94A3B8' : '#475569',
-        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-        padding: { xs: '6px', sm: '8px' },
+        color: 'text.secondary',
+        transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+        width: 40,
+        height: 40,
         '&:hover': {
-          color: theme.palette.primary.main,
-          transform: 'translateY(-3px) scale(1.1)',
-          background: 'none'
+          color: 'primary.main',
+          background: alpha(theme.palette.primary.main, 0.08),
+          transform: 'translateY(-4px) scale(1.05)',
         },
-        '&::after': {
-          content: '""',
-          position: 'absolute',
-          width: '100%',
-          transform: 'scaleX(0)',
-          height: '1px',
-          bottom: 0,
-          left: 0,
-          backgroundColor: theme.palette.primary.main,
-          transformOrigin: 'bottom right',
-          transition: 'transform 0.25s ease-out'
-        },
-        '&:hover::after': {
-          transform: 'scaleX(1)',
-          transformOrigin: 'bottom left'
-        }
       }}
     >
-      <Icon sx={{ 
-        fontSize: { xs: 16, sm: 18 },
-        transition: 'transform 0.3s ease',
-        '&:hover': {
-          transform: 'rotate(10deg)'
-        }
-      }} />
+      <Icon sx={{ fontSize: 20 }} />
     </IconButton>
   );
 };
 
+/**
+ * Footer Component
+ */
 const Footer = () => {
   const theme = useTheme();
   const { footer } = portfolioConfig;
 
   return (
     <footer>
-      <Container 
-        maxWidth="lg" 
-        sx={{ 
-          py: { xs: 2, sm: 3 },
-          mt: { xs: 6, sm: 8 },
+      <Container
+        maxWidth="lg"
+        sx={{
+          py: { xs: 3, sm: 4 },
+          mt: { xs: 8, sm: 12 },
           display: 'flex',
           flexDirection: 'column',
-          gap: { xs: 1.5, sm: 2 },
+          gap: { xs: 2, sm: 2.5 },
           position: 'relative',
           '&::before': {
             content: '""',
@@ -70,25 +56,22 @@ const Footer = () => {
             top: 0,
             left: '50%',
             transform: 'translateX(-50%)',
-            width: '80%',
+            width: '60%',
             height: '1px',
             background: theme.palette.mode === 'dark'
               ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)'
-              : 'linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent)',
+              : 'linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent)',
           }
         }}
       >
         <FadeInSection>
           {/* Social Links */}
-          <Box 
+          <Box
             sx={{
               display: 'flex',
               justifyContent: 'center',
-              gap: { xs: 3, sm: 6 },
-              mb: { xs: 2, sm: 4 },
-              '& a': {
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              }
+              gap: 1.5,
+              mb: 1,
             }}
           >
             {footer.socialLinks.map((social, index) => (
@@ -97,41 +80,32 @@ const Footer = () => {
           </Box>
 
           {/* Copyright Text */}
-          <Typography 
-            variant="caption" 
+          <Typography
+            variant="body2"
             component="p"
             align="center"
-            sx={{ 
-              color: theme.palette.mode === 'dark' ? '#94A3B8' : '#475569',
-              fontSize: { xs: '0.7rem', sm: '0.75rem' },
+            sx={{
+              color: 'text.secondary',
+              fontSize: { xs: '0.85rem', sm: '0.9rem' },
               fontWeight: 400,
               letterSpacing: '0.02em',
-              opacity: 0.8,
-              mb: { xs: 0.5, sm: 1 },
-              transition: 'color 0.3s ease',
-              '&:hover': {
-                color: theme.palette.primary.main
-              }
+              opacity: 0.85,
             }}
           >
             {footer.copyright}
           </Typography>
 
           {/* Built With Text */}
-          <Typography 
-            variant="caption" 
+          <Typography
+            variant="caption"
             component="p"
             align="center"
-            sx={{ 
-              color: theme.palette.mode === 'dark' ? '#64748B' : '#64748B',
-              fontSize: { xs: '0.65rem', sm: '0.7rem' },
+            sx={{
+              color: 'text.secondary',
+              fontSize: { xs: '0.75rem', sm: '0.8rem' },
               fontWeight: 400,
               letterSpacing: '0.02em',
-              opacity: 0.6,
-              transition: 'opacity 0.3s ease',
-              '&:hover': {
-                opacity: 1
-              }
+              opacity: 0.7,
             }}
           >
             Built with React, Material-UI, and ❤️
@@ -142,4 +116,4 @@ const Footer = () => {
   );
 };
 
-export default Footer; 
+export default Footer;
